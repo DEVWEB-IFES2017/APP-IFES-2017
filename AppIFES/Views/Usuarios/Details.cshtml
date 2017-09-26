@@ -1,0 +1,42 @@
+﻿@model AppIFES.Models.Usuario
+
+@{
+    ViewBag.Title = "Informações";
+}
+
+<h2>Informações</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.supervisor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.simnao.descricao)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.idusuario }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Cancelar", "Index", new { area = "" }, new { @class = "btn btn-success" })
+</p>
