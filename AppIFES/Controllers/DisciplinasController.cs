@@ -17,7 +17,7 @@ namespace AppIFES.Controllers
         // GET: Disciplinas
         public ActionResult Index()
         {
-            if ((Session["Userid"] != null) && Session["UserSupervisor"].Equals("1"))
+            if ((Session["Userid"] == null) || (! Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -28,7 +28,7 @@ namespace AppIFES.Controllers
         // GET: Disciplinas/Details/5
         public ActionResult Details(int? id)
         {
-            if ((Session["Userid"] != null) && Session["UserSupervisor"].Equals("1"))
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -47,7 +47,7 @@ namespace AppIFES.Controllers
         // GET: Disciplinas/Create
         public ActionResult Create()
         {
-            if ((Session["Userid"] != null) && Session["UserSupervisor"].Equals("1"))
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -62,7 +62,7 @@ namespace AppIFES.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "iddisciplina,descricao,idusuario")] Disciplina disciplina)
         {
-            if ((Session["Userid"] != null) && Session["UserSupervisor"].Equals("1"))
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -80,7 +80,7 @@ namespace AppIFES.Controllers
         // GET: Disciplinas/Edit/5
         public ActionResult Edit(int? id)
         {
-            if ((Session["Userid"] != null) && Session["UserSupervisor"].Equals("1"))
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -104,7 +104,7 @@ namespace AppIFES.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "iddisciplina,descricao,idusuario")] Disciplina disciplina)
         {
-            if ((Session["Userid"] != null) && Session["UserSupervisor"].Equals("1"))
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -121,7 +121,7 @@ namespace AppIFES.Controllers
         // GET: Disciplinas/Delete/5
         public ActionResult Delete(int? id)
         {
-            if ((Session["Userid"] != null) && Session["UserSupervisor"].Equals("1"))
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -142,7 +142,7 @@ namespace AppIFES.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            if ((Session["Userid"] != null) && Session["UserSupervisor"].Equals("1"))
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
