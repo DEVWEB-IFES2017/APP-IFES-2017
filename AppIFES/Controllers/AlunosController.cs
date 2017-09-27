@@ -17,7 +17,7 @@ namespace AppIFES.Controllers
         // GET: Alunos
         public ActionResult Index()
         {
-            if (Session["Userid"] == null)
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -27,7 +27,7 @@ namespace AppIFES.Controllers
         // GET: Alunos/Details/5
         public ActionResult Details(int? id)
         {
-            if (Session["Userid"] == null)
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -46,7 +46,7 @@ namespace AppIFES.Controllers
         // GET: Alunos/Create
         public ActionResult Create()
         {
-            if (Session["Userid"] == null)
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -60,7 +60,7 @@ namespace AppIFES.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idaluno,nome,email")] Aluno aluno)
         {
-            if (Session["Userid"] == null)
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -77,7 +77,7 @@ namespace AppIFES.Controllers
         // GET: Alunos/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (Session["Userid"] == null)
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -100,7 +100,7 @@ namespace AppIFES.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idaluno,nome,email")] Aluno aluno)
         {
-            if (Session["Userid"] == null)
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -116,7 +116,7 @@ namespace AppIFES.Controllers
         // GET: Alunos/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (Session["Userid"] == null)
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -137,7 +137,7 @@ namespace AppIFES.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            if (Session["Userid"] == null)
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }

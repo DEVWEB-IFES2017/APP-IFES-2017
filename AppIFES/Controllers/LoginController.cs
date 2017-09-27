@@ -17,7 +17,7 @@ namespace AppIFES.Controllers
         // GET: Loginadm
         public ActionResult Login()
         {
-            if ((Session["Userid"] != null) && Session["UserSupervisor"].Equals("1"))
+            if (Session["Userid"] != null)
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }

@@ -17,21 +17,18 @@ namespace AppIFES.Controllers
         // GET: Usuarios
         public ActionResult Index()
         {
-            if (Session["Userid"] == null)
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
-            else
-            {
-                var usuarios = db.Usuarios.Include(u => u.simnao);
-                return View(usuarios.ToList());
-            }
+            var usuarios = db.Usuarios.Include(u => u.simnao);
+                return View(usuarios.ToList());         
         }
 
         // GET: Usuarios/Details/5
         public ActionResult Details(int? id)
         {
-            if (Session["Userid"] == null)
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -50,7 +47,7 @@ namespace AppIFES.Controllers
         // GET: Usuarios/Create
         public ActionResult Create()
         {
-            if (Session["Userid"] == null)
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -65,7 +62,7 @@ namespace AppIFES.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idusuario,nome,email,senha,supervisor")] Usuario usuario)
         {
-            if (Session["Userid"] == null)
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -83,7 +80,7 @@ namespace AppIFES.Controllers
         // GET: Usuarios/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (Session["Userid"] == null)
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -107,7 +104,7 @@ namespace AppIFES.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idusuario,nome,email,senha,supervisor")] Usuario usuario)
         {
-            if (Session["Userid"] == null)
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -124,7 +121,7 @@ namespace AppIFES.Controllers
         // GET: Usuarios/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (Session["Userid"] == null)
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -145,7 +142,7 @@ namespace AppIFES.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            if (Session["Userid"] == null)
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }

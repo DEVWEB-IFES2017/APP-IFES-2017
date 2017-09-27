@@ -13,7 +13,7 @@ namespace AppIFES.Models
     public class Alunodisciplina
     {
         [Key]
-        [Display(Name = "Disciplina")]
+        [Display(Name = "Grupo")]
         [Column(Order = 0)]
         public Int32 iddisciplina { get; set; }
 

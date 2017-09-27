@@ -13,11 +13,11 @@ namespace AppIFES.Models
     public class Disciplina
     {
         [Key]
-        [Display(Name = "Disciplina")]
+        [Display(Name = "Código")]
         [Column(Order = 0)]
         public Int32 iddisciplina { get; set; }
 
-        [Display(Name = "Disciplina")]
+        [Display(Name = "Grupo")]
         [StringLength(80, ErrorMessage = "No máximo são 80 caracteres.")]
         [Required(ErrorMessage = "Digite o nome da Disciplina."), Column(Order = 1)]
         public string descricao { get; set; }
