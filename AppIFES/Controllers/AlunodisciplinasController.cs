@@ -17,7 +17,8 @@ namespace AppIFES.Controllers
         // GET: Alunodisciplinas
         public ActionResult Index(int? id)
         {
-            var alunodisciplinas = db.Alunodisciplinas.Where(a => a.idaluno.Equals(id)).Include(a => a.aluno).Include(a => a.disciplina).ToList();
+            ViewBag.idIndex = id;
+            List<Alunodisciplina> alunodisciplinas = db.Alunodisciplinas.Where(a => a.idaluno ==id).Include(a => a.aluno).Include(a => a.disciplina).ToList();
             return View(alunodisciplinas);
         }
 
@@ -37,9 +38,10 @@ namespace AppIFES.Controllers
         }
 
         // GET: Alunodisciplinas/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            ViewBag.idaluno = new SelectList(db.Alunoes, "idaluno", "nome");
+            ViewBag.id = id;
+            ViewBag.idaluno = new SelectList(db.Alunoes, "idaluno", "nome", id);
             ViewBag.iddisciplina = new SelectList(db.Disciplinas, "iddisciplina", "descricao");
             return View();
         }
@@ -64,13 +66,13 @@ namespace AppIFES.Controllers
         }
 
         // GET: Alunodisciplinas/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id,int? idaluno)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Alunodisciplina alunodisciplina = db.Alunodisciplinas.Find(id);
+            Alunodisciplina alunodisciplina = db.Alunodisciplinas.Find(id,idaluno);
             if (alunodisciplina == null)
             {
                 return HttpNotFound();
@@ -99,13 +101,15 @@ namespace AppIFES.Controllers
         }
 
         // GET: Alunodisciplinas/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id, int? idaluno)
         {
+            ViewBag.idDelete = idaluno;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Alunodisciplina alunodisciplina = db.Alunodisciplinas.Find(id);
+            Alunodisciplina alunodisciplina = db.Alunodisciplinas.Find(id, idaluno);
             if (alunodisciplina == null)
             {
                 return HttpNotFound();
@@ -116,9 +120,9 @@ namespace AppIFES.Controllers
         // POST: Alunodisciplinas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, int? idaluno)
         {
-            Alunodisciplina alunodisciplina = db.Alunodisciplinas.Find(id);
+            Alunodisciplina alunodisciplina = db.Alunodisciplinas.Find(id, idaluno);
             db.Alunodisciplinas.Remove(alunodisciplina);
             db.SaveChanges();
             return RedirectToAction("Index");
