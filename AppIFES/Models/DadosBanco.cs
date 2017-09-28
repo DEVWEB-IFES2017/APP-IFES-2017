@@ -12,5 +12,7 @@ namespace AppIFES.Models
         public System.Data.Entity.DbSet<AppIFES.Models.Aluno> Alunoes { get; set; }
 
         public System.Data.Entity.DbSet<AppIFES.Models.Disciplina> Disciplinas { get; set; }
+
+        public System.Data.Entity.DbSet<AppIFES.Models.Alunodisciplina> Alunodisciplinas { get; set; }
     }
 }

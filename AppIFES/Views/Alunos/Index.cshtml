@@ -34,6 +34,7 @@
                     @Html.ActionLink("Alterar", "Edit", new { id = item.idaluno }, new { @class = "btn btn-warning" })
                     @Html.ActionLink("Detalhar", "Details", new { id = item.idaluno }, new { @class = "btn btn-success" })
                     @Html.ActionLink("Apagar", "Delete", new { id = item.idaluno }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Disciplinas", "Index","Alunodisciplinas", new { id = item.idaluno }, new { @class = "btn btn-info" })
                 </td>
             </tr>
         }

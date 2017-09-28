@@ -15,16 +15,20 @@ namespace AppIFES.Models
         [Key]
         [Display(Name = "Grupo")]
         [Column(Order = 0)]
+        [Required(ErrorMessage = "Informe um Aluno", AllowEmptyStrings = false)]
         public Int32 iddisciplina { get; set; }
 
+        [Required(ErrorMessage = "Informe um Aluno", AllowEmptyStrings = false)]
         [ForeignKey("iddisciplina")]
         public Disciplina disciplina { get; set; }
 
         [Key]
         [Display(Name = "Aluno")]
         [Column(Order = 1)]
+        [Required(ErrorMessage = "Informe um Aluno", AllowEmptyStrings = false)]
         public Int32 idaluno { get; set; }
 
+        [Required(ErrorMessage = "Informe um Aluno", AllowEmptyStrings = false)]
         [ForeignKey("idaluno")]
         public Aluno aluno { get; set; }        
     }
