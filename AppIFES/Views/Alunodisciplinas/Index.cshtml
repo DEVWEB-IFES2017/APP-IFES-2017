@@ -4,11 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h1>Grupos do Aluno</h1>
 
 <p>
-    @Html.ActionLink("Create New", "Create", new { id = ViewBag.idIndex} )
+    @Html.ActionLink("Inserir Novo Grupo", "Create", new { id = ViewBag.idIndex}, new { @class = "btn btn-primary" } )
 </p>
+<br /><br />
+<h4> Lista de Grupos do Aluno</h4>
 <table class="table">
     <tr>
         <th>
@@ -29,9 +31,7 @@
             @Html.DisplayFor(modelItem => item.disciplina.descricao)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Delete", "Delete", new { id =  item.iddisciplina, id2 = item.idaluno }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }
