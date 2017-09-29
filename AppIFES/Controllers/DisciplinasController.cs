@@ -36,7 +36,11 @@ namespace AppIFES.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Disciplina disciplina = db.Disciplinas.Find(id);
+            //Disciplina disciplina = db.Disciplinas.Find(id);
+            //disciplina.usuario = db.Usuarios.Find(disciplina.idusuario);
+
+            Disciplina disciplina = db.Disciplinas.Where(d => d.iddisciplina == id).Include(d=>d.usuario).FirstOrDefault();
+
             if (disciplina == null)
             {
                 return HttpNotFound();
