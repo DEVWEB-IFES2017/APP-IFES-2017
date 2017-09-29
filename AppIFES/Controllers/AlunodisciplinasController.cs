@@ -12,11 +12,17 @@ namespace AppIFES.Controllers
 {
     public class AlunodisciplinasController : Controller
     {
+
+
         private DadosBanco db = new DadosBanco();
 
         // GET: Alunodisciplinas
         public ActionResult Index(int? id)
         {
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             ViewBag.idIndex = id;
             List<Alunodisciplina> alunodisciplinas = db.Alunodisciplinas.Where(a => a.idaluno ==id).Include(a => a.aluno).Include(a => a.disciplina).ToList();
             return View(alunodisciplinas);
@@ -25,6 +31,10 @@ namespace AppIFES.Controllers
         // GET: Alunodisciplinas/Details/5
         public ActionResult Details(int? id)
         {
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -40,6 +50,10 @@ namespace AppIFES.Controllers
         // GET: Alunodisciplinas/Create
         public ActionResult Create(int? id)
         {
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             ViewBag.id = id;
             ViewBag.idaluno = new SelectList(db.Alunoes, "idaluno", "nome", id);
             ViewBag.iddisciplina = new SelectList(db.Disciplinas, "iddisciplina", "descricao");
@@ -53,11 +67,15 @@ namespace AppIFES.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "iddisciplina,idaluno")] Alunodisciplina alunodisciplina)
         {
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             if (ModelState.IsValid)
             {
                 db.Alunodisciplinas.Add(alunodisciplina);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = alunodisciplina.idaluno });
             }
 
             ViewBag.idaluno = new SelectList(db.Alunoes, "idaluno", "nome", alunodisciplina.idaluno);
@@ -68,6 +86,10 @@ namespace AppIFES.Controllers
         // GET: Alunodisciplinas/Edit/5
         public ActionResult Edit(int? id,int? idaluno)
         {
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -89,6 +111,10 @@ namespace AppIFES.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "iddisciplina,idaluno")] Alunodisciplina alunodisciplina)
         {
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(alunodisciplina).State = EntityState.Modified;
@@ -101,31 +127,40 @@ namespace AppIFES.Controllers
         }
 
         // GET: Alunodisciplinas/Delete/5
-        public ActionResult Delete(int? id, int? idaluno)
+        public ActionResult Delete(int id, int? id2)
         {
-            ViewBag.idDelete = idaluno;
-
+            ViewBag.idDelete = id2;
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Alunodisciplina alunodisciplina = db.Alunodisciplinas.Find(id, idaluno);
+            Alunodisciplina alunodisciplina = db.Alunodisciplinas.Find(id, id2);
             if (alunodisciplina == null)
             {
                 return HttpNotFound();
             }
+            alunodisciplina.aluno = db.Alunoes.Find(id2);
+            alunodisciplina.disciplina = db.Disciplinas.Find(id);
             return View(alunodisciplina);
         }
 
         // POST: Alunodisciplinas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id, int? idaluno)
+        public ActionResult DeleteConfirmed(int id, int? id2)
         {
-            Alunodisciplina alunodisciplina = db.Alunodisciplinas.Find(id, idaluno);
+            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
+            Alunodisciplina alunodisciplina = db.Alunodisciplinas.Find(id, id2);
             db.Alunodisciplinas.Remove(alunodisciplina);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = id2 });
         }
 
         protected override void Dispose(bool disposing)
