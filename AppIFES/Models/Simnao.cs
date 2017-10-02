@@ -14,7 +14,7 @@ namespace AppIFES.Models
         [Key]
         [Column(Order = 0)]
         public Int32 ativo { get; set; }
-        [Display(Name = "descrição")]
+        [Display(Name = "Descrição")]
         [Column(Order = 1)]
         public string descricao { get; set; }
     }
