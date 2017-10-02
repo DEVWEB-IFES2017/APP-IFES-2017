@@ -18,4 +18,5 @@ namespace AppIFES.Models
         [Column(Order = 1)]
         public string descricao { get; set; }
     }
+
 }
