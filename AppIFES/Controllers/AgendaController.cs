@@ -60,7 +60,7 @@ namespace AppIFES.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idagenda,iddisciplina,dataevento,Título,descricao,local")] Agenda agenda)
+        public ActionResult Create([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local")] Agenda agenda)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace AppIFES.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idagenda,iddisciplina,dataevento,Título,descricao,local")] Agenda agenda)
+        public ActionResult Edit([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local")] Agenda agenda)
         {
             if (ModelState.IsValid)
             {
