@@ -219,6 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AgendaController.cs" />
     <Compile Include="Controllers\AlunodisciplinasController.cs" />
     <Compile Include="Controllers\AlunosController.cs" />
     <Compile Include="Controllers\DisciplinasController.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Agenda.cs" />
     <Compile Include="Models\Aluno.cs" />
     <Compile Include="Models\Alunodisciplina.cs" />
     <Compile Include="Models\DadosBanco.cs" />
@@ -267,6 +269,11 @@
     <Content Include="Views\Alunodisciplinas\Details.cshtml" />
     <Content Include="Views\Alunodisciplinas\Edit.cshtml" />
     <Content Include="Views\Alunodisciplinas\Index.cshtml" />
+    <Content Include="Views\Agenda\Create.cshtml" />
+    <Content Include="Views\Agenda\Delete.cshtml" />
+    <Content Include="Views\Agenda\Details.cshtml" />
+    <Content Include="Views\Agenda\Edit.cshtml" />
+    <Content Include="Views\Agenda\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

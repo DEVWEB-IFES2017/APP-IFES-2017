@@ -1,0 +1,57 @@
+﻿@model IEnumerable<AppIFES.Models.Agenda>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cadastro de Agenda</h2>
+
+<p>
+    @Html.ActionLink("Novo", "Create", new { id = ViewBag.idIndex }, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.iddisciplina)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dataevento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.local)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.iddisciplina)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dataevento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.local)
+        </td>
+        <td>
+            @Html.ActionLink("Alterar", "Edit", new { id=item.idagenda }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Detalhar", "Details", new { id=item.idagenda }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Apagar", "Delete", new { id=item.idagenda }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,64 @@
+﻿@model AppIFES.Models.Agenda
+
+@{
+    ViewBag.Title = "Excluir evento";
+}
+
+<h2>Delete</h2>
+
+<h3>Tem certeza que deseja deletar o compromisso da agenda?</h3>
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.iddisciplina)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iddisciplina)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dataevento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dataevento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.local)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.local)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Confirmar" class="btn btn-danger" /> 
+            @Html.ActionLink("Cancelar", "Index", new { area = "" }, new { @class = "btn btn-success" })
+        </div>
+    }
+</div>
