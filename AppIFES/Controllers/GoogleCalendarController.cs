@@ -20,10 +20,17 @@ namespace AppIFESCalendar.Controllers
         static string[] Scopes = { CalendarService.Scope.CalendarReadonly };
         static string ApplicationName = "Calendar API Quickstart";
 
-        private GoogleCalendar googlecalendario = new GoogleCalendar(); 
+        private GoogleCalendar googlecalendario = new GoogleCalendar();
 
         // GET: Categorias
-        public ActionResult Index()
+        public ActionResult Adicionar()
+        {
+
+
+            return null;
+        }
+
+            public ActionResult Index()
         {
             googlecalendario.Credencial = Login();
 
