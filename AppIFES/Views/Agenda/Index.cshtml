@@ -13,9 +13,11 @@
 <div class="table-responsive">
     <table class="table table-striped">
         <tr>
-            <th>
+            
+            @*<th>
                 @Html.DisplayNameFor(model => model.iddisciplina)
-            </th>
+            </th>*@
+               
             <th>
                 @Html.DisplayNameFor(model => model.Disciplina.descricao)
             </th>
@@ -39,9 +41,9 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.iddisciplina)
-                </td>
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Disciplina.descricao)
                 </td>
