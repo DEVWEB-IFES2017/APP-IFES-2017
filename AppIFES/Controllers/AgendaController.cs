@@ -113,7 +113,7 @@ namespace AppIFES.Controllers
             {
                 db.Entry(agenda).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Alterar", "GoogleCalendar", new { idagenda = agenda.idagenda, date = agenda.dataevento, titulo = agenda.titulo, descricao = agenda.descricao, local = agenda.local });
             }
             ViewBag.iddisciplina = new SelectList(db.Disciplinas, "iddisciplina", "descricao", agenda.iddisciplina);
             return View(agenda);
@@ -150,7 +150,8 @@ namespace AppIFES.Controllers
             Agenda agenda = db.Agenda.Find(id);
             db.Agenda.Remove(agenda);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Apagar", "GoogleCalendar", new { idagenda = agenda.idagenda});
         }
 
         protected override void Dispose(bool disposing)
