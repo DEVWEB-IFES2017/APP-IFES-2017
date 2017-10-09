@@ -11,43 +11,110 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using AppIFESCalendar.Models;
+using AppIFES.Models;
+using System.Data.Entity;
 
 namespace AppIFESCalendar.Controllers
 {
     public class GoogleCalendarController : Controller
     {
         static string[] Scopes = { CalendarService.Scope.CalendarReadonly };
-        static string ApplicationName = "Calendar API Quickstart";
+        static string ApplicationName = "Google Calendar API Quickstart";
+        string calendarid = "primary";
+
+        private DadosBanco db = new DadosBanco();
 
         private GoogleCalendar googlecalendario = new GoogleCalendar();
 
-        // GET: Categorias
-        public ActionResult Adicionar()
+        // GET: Adicionar
+        public ActionResult Adicionar(int idagenda, DateTime date, string titulo, string descricao, string local)
         {
+            Agenda agenda = db.Agenda.Find(idagenda);
+            Disciplina disciplina = db.Disciplinas.Where(a => a.iddisciplina == agenda.iddisciplina).Include(a => a.usuario).FirstOrDefault();
+            List<Alunodisciplina> alunodisciplinas = db.Alunodisciplinas.Where(a => a.iddisciplina == agenda.iddisciplina).Include(a => a.aluno).ToList();
 
 
-            return null;
-        }
+            EventAttendee[] Contatos = new EventAttendee[] { };
+            EventAttendee Contato = new EventAttendee();
 
-            public ActionResult Index()
-        {
-            googlecalendario.Credencial = Login();
+            Contato.Email = disciplina.usuario.email;
+            Contatos = new EventAttendee[] { Contato };
 
-            return View(googlecalendario);
-        }
+            foreach (var alunodisciplina in alunodisciplinas)
+            {
+                Contato.Email = alunodisciplina.aluno.email;
+                Contatos = new EventAttendee[] { Contato };
+            }
 
-        public ActionResult Calendario()
-        {
-            googlecalendario.Eventos = GetData(Login());
-            return View(googlecalendario);
-        }
+            googlecalendario.Evento = new Event()
+            {
+                Created = date,
+                Description = descricao,
+                Location = local,
+                Kind = "",
+                GuestsCanInviteOthers = true,
+                Summary = titulo,
+                Sequence = idagenda,
+                Start = new EventDateTime()
+                {
+                    DateTime = date,
+                    TimeZone = "America/Boa_Vista"
+                },
+                End = new EventDateTime()
+                {
+                    DateTime = date,
+                    TimeZone = "America/Boa_Vista"
+                },
+                Recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=2" },
+                Attendees = Contatos,
+                Reminders = new Event.RemindersData()
+                {
+                    UseDefault = false,
+                    Overrides = new EventReminder[] {
+                        new EventReminder() { Method = "email", Minutes = 24 * 60 },
+                        new EventReminder() { Method = "sms", Minutes = 24 * 60 },
+                        new EventReminder() { Method = "popup", Minutes = 24 * 60 }
+                    }                
+                }
+            };
 
-        public ActionResult ListaCalendario()
-        {
             googlecalendario.Calendarios = CalendarSer(Login());
+            String idEvento = googlecalendario.Calendarios.Events.Insert(googlecalendario.Evento, calendarid).Execute().Id;
+            agenda.idevento = idEvento;
 
-            return View(googlecalendario);
+            db.Entry(agenda).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Agenda");
+        }
+
+        // GET: Alterar
+        public ActionResult Alterar(int idagenda, DateTime date, string titulo, string descricao, string local)
+        {
+            googlecalendario.Evento = new Event()
+            {
+                Created = date,
+                Description = descricao,
+                Location = local,
+                GuestsCanInviteOthers = true,
+                Summary = titulo,
+                Sequence = idagenda,
+            };
+
+            Agenda agenda = db.Agenda.Find(idagenda);
+            googlecalendario.Calendarios = CalendarSer(Login());
+            googlecalendario.Calendarios.Events.Update(googlecalendario.Evento, calendarid, agenda.idevento).Execute();
+
+            return RedirectToAction("Index", "Agenda");
+        }
+
+        public ActionResult Apagar(int idagenda)
+        {
+            Agenda agenda = db.Agenda.Find(idagenda);
+            googlecalendario.Calendarios = CalendarSer(Login());
+            googlecalendario.Calendarios.Events.Delete(calendarid, agenda.idevento).Execute();
+
+            return RedirectToAction("Index", "Agenda");
         }
 
         private CalendarService CalendarSer(UserCredential credential)
@@ -56,7 +123,8 @@ namespace AppIFESCalendar.Controllers
             var service = new CalendarService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
-                ApplicationName = ApplicationName,
+                ApplicationName = ApplicationName
+                //ApiKey = Chave
             });
             return service;
         }
@@ -74,20 +142,20 @@ namespace AppIFESCalendar.Controllers
             request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
 
             Events events = request.Execute();
-            
-            return events;                       
+
+            return events;
         }
 
         static UserCredential Login()
         {
             UserCredential credential;
 
-            using (var stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory+@"Components\client_secret.json", FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + @"Components\client_secret.json", FileMode.Open, FileAccess.Read))
             {
                 string credPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
                 credPath = Path.Combine(credPath, ".credentials");
-
-                credential = GoogleWebAuthorizationBroker.AuthorizeAsync( GoogleClientSecrets.Load(stream).Secrets, Scopes, "user", CancellationToken.None, new FileDataStore(credPath, true)).Result;
+                Scopes = new[] { CalendarService.Scope.Calendar };
+                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(stream).Secrets, Scopes, "user", CancellationToken.None, new FileDataStore(credPath, true)).Result;
             }
 
             return credential;

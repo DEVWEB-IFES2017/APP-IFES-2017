@@ -6,12 +6,15 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Calendar.v3;
 
-namespace AppIFESCalendar.Models
+namespace AppIFES.Models
 {
     public class GoogleCalendar
     {
         public UserCredential Credencial { get; set; }
         public Events Eventos { get; set; }
         public CalendarService Calendarios { get; set; }
+        public Event Evento { get; set; }
+
+
     }
 }

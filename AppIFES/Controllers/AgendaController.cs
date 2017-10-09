@@ -17,7 +17,7 @@ namespace AppIFES.Controllers
         // GET: Agenda
         public ActionResult Index()
         {
-            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
+            if (Session["Userid"] == null)
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -28,7 +28,7 @@ namespace AppIFES.Controllers
         // GET: Agenda/Details/5
         public ActionResult Details(int? id)
         {
-            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
+            if (Session["Userid"] == null)
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -47,7 +47,7 @@ namespace AppIFES.Controllers
         // GET: Agenda/Create
         public ActionResult Create()
         {
-            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
+            if (Session["Userid"] == null)
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -60,13 +60,18 @@ namespace AppIFES.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local")] Agenda agenda)
+        public ActionResult Create([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local,idevento")] Agenda agenda)
         {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             if (ModelState.IsValid)
             {
                 db.Agenda.Add(agenda);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Adicionar", "GoogleCalendar", new { idagenda = agenda.idagenda, date = agenda.dataevento, titulo = agenda.titulo, descricao = agenda.descricao, local = agenda.local });
             }
 
             ViewBag.iddisciplina = new SelectList(db.Disciplinas, "iddisciplina", "descricao", agenda.iddisciplina);
@@ -76,6 +81,10 @@ namespace AppIFES.Controllers
         // GET: Agenda/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -94,8 +103,12 @@ namespace AppIFES.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local")] Agenda agenda)
+        public ActionResult Edit([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local,idevento")] Agenda agenda)
         {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(agenda).State = EntityState.Modified;
@@ -109,6 +122,10 @@ namespace AppIFES.Controllers
         // GET: Agenda/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -126,6 +143,10 @@ namespace AppIFES.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             Agenda agenda = db.Agenda.Find(id);
             db.Agenda.Remove(agenda);
             db.SaveChanges();
