@@ -48,7 +48,7 @@ namespace AppIFES.Models
         
         [Display(Name = "Código do Evento")]
         [StringLength(150, ErrorMessage = "No máximo são 150 caracteres.")]
-        [Column(Order = 5)]
+        [Column(Order = 6)]
         public string idevento { get; set; }
     }
 }
