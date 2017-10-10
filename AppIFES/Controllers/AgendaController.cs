@@ -148,10 +148,12 @@ namespace AppIFES.Controllers
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
             Agenda agenda = db.Agenda.Find(id);
+            string idEvento = agenda.idevento;
+
             db.Agenda.Remove(agenda);
             db.SaveChanges();
 
-            return RedirectToAction("Apagar", "GoogleCalendar", new { idagenda = agenda.idagenda});
+            return RedirectToAction("Apagar", "GoogleCalendar", new { idevento = idEvento });
         }
 
         protected override void Dispose(bool disposing)

@@ -29,21 +29,21 @@ namespace AppIFESCalendar.Controllers
         // GET: Adicionar
         public ActionResult Adicionar(int idagenda, DateTime date, string titulo, string descricao, string local)
         {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
+
             Agenda agenda = db.Agenda.Find(idagenda);
             Disciplina disciplina = db.Disciplinas.Where(a => a.iddisciplina == agenda.iddisciplina).Include(a => a.usuario).FirstOrDefault();
             List<Alunodisciplina> alunodisciplinas = db.Alunodisciplinas.Where(a => a.iddisciplina == agenda.iddisciplina).Include(a => a.aluno).ToList();
 
-
-            EventAttendee[] Contatos = new EventAttendee[] { };
-            EventAttendee Contato = new EventAttendee();
-
-            Contato.Email = disciplina.usuario.email;
-            Contatos = new EventAttendee[] { Contato };
-
+            List<EventAttendee> Contatos = new List<EventAttendee>();
+            Contatos.Add(new EventAttendee { Email = disciplina.usuario.email });
+            
             foreach (var alunodisciplina in alunodisciplinas)
             {
-                Contato.Email = alunodisciplina.aluno.email;
-                Contatos = new EventAttendee[] { Contato };
+                Contatos.Add(new EventAttendee { Email = alunodisciplina.aluno.email });
             }
 
             googlecalendario.Evento = new Event()
@@ -91,6 +91,11 @@ namespace AppIFESCalendar.Controllers
         // GET: Alterar
         public ActionResult Alterar(int idagenda, DateTime date, string titulo, string descricao, string local)
         {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
+
             googlecalendario.Evento = new Event()
             {
                 Created = date,
@@ -108,12 +113,18 @@ namespace AppIFESCalendar.Controllers
             return RedirectToAction("Index", "Agenda");
         }
 
-        public ActionResult Apagar(int idagenda)
+        public ActionResult Apagar(string idevento)
         {
-            Agenda agenda = db.Agenda.Find(idagenda);
-            googlecalendario.Calendarios = CalendarSer(Login());
-            googlecalendario.Calendarios.Events.Delete(calendarid, agenda.idevento).Execute();
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
 
+            if (idevento != null)
+            {
+                googlecalendario.Calendarios = CalendarSer(Login());
+                googlecalendario.Calendarios.Events.Delete(calendarid, idevento).Execute();
+            }
             return RedirectToAction("Index", "Agenda");
         }
 
