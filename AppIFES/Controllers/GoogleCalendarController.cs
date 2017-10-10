@@ -65,7 +65,7 @@ namespace AppIFESCalendar.Controllers
                     DateTime = date,
                     TimeZone = "America/Boa_Vista"
                 },
-                Recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=2" },
+                Recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=1" },
                 Attendees = Contatos,
                 Reminders = new Event.RemindersData()
                 {

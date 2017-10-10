@@ -13,7 +13,7 @@ namespace AppIFES.Controllers
     public class AgendaController : Controller
     {
         private DadosBanco db = new DadosBanco();
-
+                
         // GET: Agenda
         public ActionResult Index()
         {
@@ -21,8 +21,9 @@ namespace AppIFES.Controllers
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
-            int idusuario = int.Parse(Session["Userid"].ToString());
-            var agenda = db.Agenda.Include(a => a.Disciplina).Where(a =>a.Disciplina.idusuario == idusuario);
+
+            int idUsuario = int.Parse(Session["Userid"].ToString());
+            var agenda = db.Agenda.Include(a => a.Disciplina).Where(a =>a.Disciplina.idusuario == idUsuario);
             return View(agenda.ToList());
         }
 
@@ -52,7 +53,8 @@ namespace AppIFES.Controllers
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
-            ViewBag.iddisciplina = new SelectList(db.Disciplinas, "iddisciplina", "descricao");
+            int idUsuario = int.Parse(Session["Userid"].ToString());
+            ViewBag.iddisciplina = new SelectList(db.Disciplinas.Where(a => a.idusuario == idUsuario), "iddisciplina", "descricao");
             return View();
         }
 
