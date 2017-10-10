@@ -38,14 +38,14 @@
                     }
                 }
             </ul>
-            <form class="form-inline mt-2 mt-md-0">
+            <form class="form-inline mt-2 mt-md-0 col-md-2">
                 @if (Session["Userid"] == null)
                 {
-                    @Html.ActionLink(" Login ", "Login", "Login", new { area = "" }, new { @class = "btn btn-warning my-2 my-sm-0" })
+                    @Html.ActionLink(" Entrar ", "Login", "Login", new { area = "" }, new { @class = "btn btn-warning my-2 my-sm-0 col-md-8" })
                 }
                 else
                 {
-                    @Html.ActionLink(Session["UserNome"] + " | Login-Off", "LoginOff", "Login", new { area = "" }, new { @class = "btn btn-danger my-2 my-sm-0" })
+                    @Html.ActionLink(Session["UserNome"] + " | Login-Off", "LoginOff", "Login", new { area = "" }, new { @class = "btn btn-danger my-2 my-sm-0 col-md-8" })
                 }
             </form>
         </div>
