@@ -21,7 +21,8 @@ namespace AppIFES.Controllers
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
-            var agenda = db.Agenda.Include(a => a.Disciplina);
+            int idusuario = int.Parse(Session["Userid"].ToString());
+            var agenda = db.Agenda.Include(a => a.Disciplina).Where(a =>a.Disciplina.idusuario == idusuario);
             return View(agenda.ToList());
         }
 
