@@ -4,7 +4,7 @@
     ViewBag.Title = "Cadastro de Aluno";
 }
 
-<h2>Cadastro de Aluno</h2>
+<center><h2>Cadastro de Aluno</h2></center>
 
 <p>
     @Html.ActionLink("Novo", "Create", new { area = "" }, new { @class = "btn btn-primary" })
@@ -34,7 +34,7 @@
                     @Html.ActionLink("Alterar", "Edit", new { id = item.idaluno }, new { @class = "btn btn-warning" })
                     @Html.ActionLink("Detalhar", "Details", new { id = item.idaluno }, new { @class = "btn btn-success" })
                     @Html.ActionLink("Apagar", "Delete", new { id = item.idaluno }, new { @class = "btn btn-danger" })
-                    @Html.ActionLink("Disciplinas", "Index","Alunodisciplinas", new { id = item.idaluno }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Grupos", "Index","Alunodisciplinas", new { id = item.idaluno }, new { @class = "btn btn-info" })
                 </td>
             </tr>
         }
