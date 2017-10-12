@@ -3,9 +3,20 @@
     ViewBag.Title = "App IFES";
 }
 
-<h5>Últimas Notícias</h5>
 
-<div class="form-inline">
-    <iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=appifesserra%40gmail.com&amp;color=%231B887A&amp;ctz=America%2FSao_Paulo" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-    </div>
-        <script src="~/Scripts/bootstrap.min.js"></script>
+
+
+
+@if (Session["Userid"] != null)
+{
+    <center><h4>Calendário Completo</h4></center>
+
+        <center><iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=appifesserra%40gmail.com&amp;color=%231B887A&amp;ctz=America%2FSao_Paulo" style="border-width:0" width="1200" height="500" frameborder="0" scrolling="no"></iframe></center>
+}
+
+@if (Session["Userid"] == null)
+{
+    <center><h4>Últimas Notícias</h4></center>
+    <center><iframe src="http://www.serra.ifes.edu.br" style="border-width:0" width="1200" height="800" frameborder="0" scrolling="no"></iframe>  </center>
+    
+}
