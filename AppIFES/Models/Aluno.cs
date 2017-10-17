@@ -29,7 +29,7 @@ namespace AppIFES.Models
         public string email { get; set; }
 
         [ForeignKey("idaluno")]
-        public ICollection<Alunodisciplina> alunodiciplina { get; set; }
+        public ICollection<Alunodisciplina> alunodiciplinas { get; set; }
 
     }
 }

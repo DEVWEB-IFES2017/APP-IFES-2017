@@ -27,6 +27,28 @@
 
     </dl>
 </div>
+<hr/>
+<h4>Grupo/Disciplina do Aluno</h4>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.alunodiciplinas.FirstOrDefault().disciplina.descricao)
+            </th>
+        </tr>
+
+        @foreach (var item in Model.alunodiciplinas)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.disciplina.descricao)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
 <p>
     @Html.ActionLink("Editar", "Edit", new { id = Model.idaluno }, new { @class = "btn btn-warning" })
     @Html.ActionLink("Cancelar", "Index", new { area = "" }, new { @class = "btn btn-success" })
