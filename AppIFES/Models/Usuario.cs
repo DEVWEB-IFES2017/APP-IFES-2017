@@ -43,6 +43,6 @@ namespace AppIFES.Models
         public Simnao simnao { get; set; }
         
         [ForeignKey("idusuario")]
-        public ICollection<Disciplina> disciplina { get; set; }
+        public ICollection<Disciplina> disciplinas { get; set; }
     }
 }
