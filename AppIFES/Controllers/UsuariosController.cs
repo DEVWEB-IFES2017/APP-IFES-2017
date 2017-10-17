@@ -36,11 +36,11 @@ namespace AppIFES.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuarios.Find(id);
+            Usuario usuario = db.Usuarios.Where(p => p.idusuario==id).Include(p => p.disciplinas).Include(p => p.simnao).FirstOrDefault();
             if (usuario == null)
             {
                 return HttpNotFound();
-            }
+            } 
             return View(usuario);
         }
 
