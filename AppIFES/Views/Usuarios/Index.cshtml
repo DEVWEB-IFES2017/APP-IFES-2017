@@ -29,13 +29,13 @@ columns.Add().Encoded(false).Sanitized(false)
         </b>);
 
 }
-    ).SetLanguage("br")
+    ).SetLanguage("br").WithPaging(8)
 </div>
 
 <script>
     $(function () {
         pageGrids.ordersGrid.onRowSelect(function (e) {
-            alert(e.row.idusuario);
+            alert(e.row.nome);
         });
     });
 </script>
