@@ -5,11 +5,12 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using GridMvc.DataAnnotations;
 
 namespace AppIFES.Models
 {
     [Table("aluno")]
+    [GridTable(PagingEnabled = true, PageSize = 5)]
     public class Aluno
     {
         [Key]

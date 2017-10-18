@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -7,8 +7,13 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/gridmvc.min.js"></script>
+    <script src="~/Scripts/gridmvc.js"></script>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
     <!-- Custom styles for this template -->
     <link href="~/Content/dashboard.css" rel="stylesheet">
+    <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+   
 </head>
 <body>
     <nav style="background-color: #0B6121" class="navbar navbar-expand-md navbar-dark fixed-top">
@@ -21,7 +26,7 @@
             <ul class="navbar-nav mr-auto">
                 @if (Session["Userid"] != null)
                 {
-                    <li class="nav-item">                        
+                    <li class="nav-item">
                         @Html.ActionLink("Agenda", "Index", "Agenda", new { area = "" }, new { @class = "nav-link" })
                     </li>
                     if (Session["UserSupervisor"].Equals("1"))
@@ -59,7 +64,7 @@
         </footer>
     </div>
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AppIFES.Models.Usuario>
+@using GridMvc.Html
 
 @{
     ViewBag.Title = "Cadastro de Usuários";
@@ -9,40 +10,24 @@
 <p>
     @Html.ActionLink("Novo", "Create", new { area = "" }, new { @class = "btn btn-primary" })
 </p>
+
+
 <div class="table-responsive">
-    <table class="table table-striped">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.supervisor)
-            </th>
-            <th></th>
-        </tr>
+    @*columns.Add(col => col.nome).Titled("Nome").RenderValueAs(col => String.Format("{0}", col.nome)).Sortable(true).Filterable(true).SetWidth(220);
+    .SetInitialFilter(GridMvc.Filtering.GridFilterType.StartsWith, "a")*@
+    @Html.Grid(Model).Columns(columns =>
+{
+columns.Add(col => col.idusuario, true);
+columns.Add(col => col.nome).Titled("Nome").Sortable(true).Filterable(true);
+columns.Add(col => col.email).Titled("Email").Sortable(true);
+columns.Add().Encoded(false).Sanitized(false)
+.RenderValueAs(col =>
+        @<b>
+            @Html.ActionLink("Alterar", "Edit", new { Id = col.idusuario }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Detalhar", "Details", new { id = col.idusuario }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Apagar", "Delete", new { id = col.idusuario }, new { @class = "btn btn-danger" })
+        </b>);
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.simnao.descricao)
-                </td>
-                <td>
-                    @Html.ActionLink("Alterar" , "Edit", new { id = item.idusuario }, new { @class = "btn btn-warning" })
-                    @Html.ActionLink("Detalhar", "Details", new { id = item.idusuario }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Apagar"  , "Delete", new { id = item.idusuario }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
-        }
-
-    </table>
+}
+    )
 </div>
