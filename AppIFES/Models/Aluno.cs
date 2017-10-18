@@ -10,7 +10,7 @@ using GridMvc.DataAnnotations;
 namespace AppIFES.Models
 {
     [Table("aluno")]
-    [GridTable(PagingEnabled = true, PageSize = 5)]
+    [GridTable(PagingEnabled = true, PageSize = 2)]
     public class Aluno
     {
         [Key]

@@ -18,7 +18,7 @@
     @Html.Grid(Model).Columns(columns =>
 {
 columns.Add(col => col.idusuario, true);
-columns.Add(col => col.nome).Titled("Nome").Sortable(true).Filterable(true);
+columns.Add(col => col.nome).Titled("Nome").Filterable(true).Sortable(true);
 columns.Add(col => col.email).Titled("Email").Sortable(true);
 columns.Add().Encoded(false).Sanitized(false)
 .RenderValueAs(col =>
@@ -29,5 +29,13 @@ columns.Add().Encoded(false).Sanitized(false)
         </b>);
 
 }
-    )
+    ).SetLanguage("br")
 </div>
+
+<script>
+    $(function () {
+        pageGrids.ordersGrid.onRowSelect(function (e) {
+            alert(e.row.idusuario);
+        });
+    });
+</script>
