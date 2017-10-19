@@ -5,7 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using GridMvc.DataAnnotations;
 
 namespace AppIFES.Models
 {

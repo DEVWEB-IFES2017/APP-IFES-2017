@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<AppIFES.Models.Usuario>
 
+@using GridMvc.Html
+
 @{
     ViewBag.Title = "Cadastro de Usuários";
 }
@@ -9,40 +11,31 @@
 <p>
     @Html.ActionLink(" ", "Create", new { area = "" }, new { @class = "glyphicon glyphicon-plus btn btn-primary", @title = "Criar novo usuário" })
 </p>
+
+
 <div class="table-responsive">
-    <table class="table table-striped">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.supervisor)
-            </th>
-            <th></th>
-        </tr>
+    @*columns.Add(col => col.nome).Titled("Nome").RenderValueAs(col => String.Format("{0}", col.nome)).Sortable(true).Filterable(true).SetWidth(220);
+        .SetInitialFilter(GridMvc.Filtering.GridFilterType.StartsWith, "a")*@
+    @Html.Grid(Model).Columns(columns =>
+{
+columns.Add(col => col.idusuario, true);
+columns.Add(col => col.nome).Titled("Nome").Filterable(true).Sortable(true);
+columns.Add(col => col.email).Titled("Email").Sortable(true);
+columns.Add().Encoded(false).Sanitized(false)
+.RenderValueAs(col =>
+        @<b>
+            @Html.ActionLink(" ", "Edit", new { id = col.idusuario }, new { @class = "glyphicon glyphicon-edit btn btn-warning btn-sm", @title = "Editar usário" })
+            @Html.ActionLink(" ", "Details", new { id = col.idusuario }, new { @class = "glyphicon glyphicon-list-alt btn btn-success btn-sm", @title = "Detalhar usuários" })
+            @Html.ActionLink(" ", "Delete", new { id = col.idusuario }, new { @class = "glyphicon glyphicon-trash btn btn-danger btn-sm", @title = "Excluir usário" })
+        </b>);
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.simnao.descricao)
-                </td>
-                <td>
-                    @Html.ActionLink(" " , "Edit", new { id = item.idusuario }, new { @class = "glyphicon glyphicon-edit btn btn-warning btn-sm", @title = "Editar usário" })
-                    @Html.ActionLink(" ", "Details", new { id = item.idusuario }, new { @class = "glyphicon glyphicon-list-alt btn btn-success btn-sm", @title = "Detalhar usuários" })
-                    @Html.ActionLink(" "  , "Delete", new { id = item.idusuario }, new { @class = "glyphicon glyphicon-trash btn btn-danger btn-sm", @title = "Excluir usário" })
-                </td>
-            </tr>
-        }
-
-    </table>
+}
+    ).SetLanguage("br").WithPaging(8)
 </div>
+<script>
+    $(function () {
+        pageGrids.ordersGrid.onRowSelect(function (e) {
+            alert(e.row.nome);
+        });
+    });
+</script>
