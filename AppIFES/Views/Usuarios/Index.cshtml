@@ -7,7 +7,7 @@
 <center><h2>Cadastro de Usuários</h2></center>
 
 <p>
-    @Html.ActionLink("Novo", "Create", new { area = "" }, new { @class = "btn btn-primary" })
+    @Html.ActionLink(" ", "Create", new { area = "" }, new { @class = "glyphicon glyphicon-plus btn btn-primary", @title = "Criar novo usuário" })
 </p>
 <div class="table-responsive">
     <table class="table table-striped">
@@ -37,9 +37,9 @@
                     @Html.DisplayFor(modelItem => item.simnao.descricao)
                 </td>
                 <td>
-                    @Html.ActionLink("Alterar" , "Edit", new { id = item.idusuario }, new { @class = "btn btn-warning" })
-                    @Html.ActionLink("Detalhar", "Details", new { id = item.idusuario }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Apagar"  , "Delete", new { id = item.idusuario }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink(" " , "Edit", new { id = item.idusuario }, new { @class = "glyphicon glyphicon-edit btn btn-warning btn-sm", @title = "Editar usário" })
+                    @Html.ActionLink(" ", "Details", new { id = item.idusuario }, new { @class = "glyphicon glyphicon-list-alt btn btn-success btn-sm", @title = "Detalhar usuários" })
+                    @Html.ActionLink(" "  , "Delete", new { id = item.idusuario }, new { @class = "glyphicon glyphicon-trash btn btn-danger btn-sm", @title = "Excluir usário" })
                 </td>
             </tr>
         }

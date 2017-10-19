@@ -1,4 +1,4 @@
-﻿@model IEnumerable <AppIFES.Models.Agenda>
+﻿@model IEnumerable<AppIFES.Models.Agenda>
 
 
 @{
@@ -7,16 +7,16 @@
 
 <center><h2>Cadastro de Agenda</h2></center>
 <p>
-    @Html.ActionLink("Novo", "Create", new { id = ViewBag.idIndex }, new { @class = "btn btn-primary" })
+    @Html.ActionLink(" ", "Create", new { id = ViewBag.idIndex }, new { @class = "glyphicon glyphicon-plus btn btn-primary" }) 
 </p>
 <div class="table-responsive">
     <table align="center" class="table table-striped">
         <tr>
-            
+
             @*<th>
-                @Html.DisplayNameFor(model => model.iddisciplina)
-            </th>*@
-               
+                    @Html.DisplayNameFor(model => model.iddisciplina)
+                </th>*@
+
             <th>
                 @Html.DisplayNameFor(model => model.Disciplina.descricao)
             </th>
@@ -41,8 +41,8 @@
         {
             <tr>
                 @*<td>
-                    @Html.DisplayFor(modelItem => item.iddisciplina)
-                </td>*@
+                        @Html.DisplayFor(modelItem => item.iddisciplina)
+                    </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Disciplina.descricao)
                 </td>
@@ -59,12 +59,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.local)
                 </td>
-              
+
                 <td>
-                    @Html.ActionLink("Alterar", "Edit", new { id = item.idagenda }, new { @class = "btn btn-warning" })
-                    @Html.ActionLink("Detalhar", "Details", new { id = item.idagenda }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Apagar", "Delete", new { id = item.idagenda }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink(" ", "Edit", new { id = item.idagenda }, new { @class = "glyphicon glyphicon-edit btn btn-warning btn-sm" })
+                    @Html.ActionLink(" ", "Details", new { id = item.idagenda }, new { @class = "glyphicon glyphicon-list-alt btn btn-success btn-sm" })
+                    @Html.ActionLink(" ", "Delete", new { id = item.idagenda }, new { @class = "glyphicon glyphicon-trash btn btn-danger btn-sm" })
                 </td>
+
             </tr>
         }
 
