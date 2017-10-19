@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AppIFES.Models.Disciplina>
+@using GridMvc.Html
 
 @{
     ViewBag.Title = "Cadastro de Grupos";
@@ -10,33 +11,28 @@
     @Html.ActionLink("Novo", "Create", new { area = "" }, new { @class = "btn btn-primary" })
 </p>
 <div class="table-responsive">
-    <table class="table table-striped">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.idusuario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.descricao)
-            </th>
-            <th></th>
-        </tr>
+    @Html.Grid(Model).Columns(columns =>
+{
+columns.Add(col => col.idusuario, true);
+columns.Add(col => col.usuario.nome).Titled("Responsavel").Filterable(true).Sortable(true);
+columns.Add(col => col.descricao).Titled("Grupo").Filterable(true).Sortable(true);
+columns.Add().Encoded(false).Sanitized(false)
+.RenderValueAs(col =>
+        @<b>
+            @Html.ActionLink("Alterar", "Edit", new { Id = col.iddisciplina }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Detalhar", "Details", new { id = col.iddisciplina }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Apagar", "Delete", new { id = col.iddisciplina }, new { @class = "btn btn-danger" })
+        </b>);
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.usuario.nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.descricao)
-                </td>
-                <td>
-                    @Html.ActionLink("Alterar", "Edit", new { id = item.iddisciplina }, new { @class = "btn btn-warning" })
-                    @Html.ActionLink("Detalhar", "Details", new { id = item.iddisciplina }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Apagar", "Delete", new { id = item.iddisciplina }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
-        }
-
-    </table>
+}
+    ).SetLanguage("br").WithPaging(8)
 </div>
+
+
+<script>
+    $(function () {
+        pageGrids.ordersGrid.onRowSelect(function (e) {
+            //alert(e.row.nome);
+        });
+    });
+</script>
