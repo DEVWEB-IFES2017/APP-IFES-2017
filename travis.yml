@@ -2,7 +2,10 @@ dist: trusty
 sudo: false
 language: csharp
 solution: AppIFES.sln
-  
+ 
+branches:
+only:
+- V0100  
 script:
   - sonar-scanner 
   
