@@ -45,8 +45,10 @@ namespace AppIFES.Models
         [Column(Order = 5)]
         [Required(ErrorMessage = "Informe o local do evento")]
         public string local { get; set; }
-
-    
-
+        
+        [Display(Name = "Código do Evento")]
+        [StringLength(150, ErrorMessage = "No máximo são 150 caracteres.")]
+        [Column(Order = 6)]
+        public string idevento { get; set; }
     }
 }

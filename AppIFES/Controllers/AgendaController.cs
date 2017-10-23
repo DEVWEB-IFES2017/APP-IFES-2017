@@ -13,22 +13,24 @@ namespace AppIFES.Controllers
     public class AgendaController : Controller
     {
         private DadosBanco db = new DadosBanco();
-
+                
         // GET: Agenda
         public ActionResult Index()
         {
-            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
+            if (Session["Userid"] == null)
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
-            var agenda = db.Agenda.Include(a => a.Disciplina);
+
+            int idUsuario = int.Parse(Session["Userid"].ToString());
+            var agenda = db.Agenda.Include(a => a.Disciplina).Where(a =>a.Disciplina.idusuario == idUsuario).OrderByDescending(a => a.dataevento);
             return View(agenda.ToList());
         }
 
         // GET: Agenda/Details/5
         public ActionResult Details(int? id)
         {
-            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
+            if (Session["Userid"] == null)
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -47,11 +49,12 @@ namespace AppIFES.Controllers
         // GET: Agenda/Create
         public ActionResult Create()
         {
-            if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))
+            if (Session["Userid"] == null)
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
-            ViewBag.iddisciplina = new SelectList(db.Disciplinas, "iddisciplina", "descricao");
+            int idUsuario = int.Parse(Session["Userid"].ToString());
+            ViewBag.iddisciplina = new SelectList(db.Disciplinas.Where(a => a.idusuario == idUsuario), "iddisciplina", "descricao");
             return View();
         }
 
@@ -60,13 +63,18 @@ namespace AppIFES.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local")] Agenda agenda)
+        public ActionResult Create([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local,idevento")] Agenda agenda)
         {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             if (ModelState.IsValid)
             {
                 db.Agenda.Add(agenda);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Adicionar", "GoogleCalendar", new { idagenda = agenda.idagenda, date = agenda.dataevento, titulo = agenda.titulo, descricao = agenda.descricao, local = agenda.local });
             }
 
             ViewBag.iddisciplina = new SelectList(db.Disciplinas, "iddisciplina", "descricao", agenda.iddisciplina);
@@ -76,6 +84,10 @@ namespace AppIFES.Controllers
         // GET: Agenda/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -94,13 +106,17 @@ namespace AppIFES.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local")] Agenda agenda)
+        public ActionResult Edit([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local,idevento")] Agenda agenda)
         {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(agenda).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Alterar", "GoogleCalendar", new { idagenda = agenda.idagenda, date = agenda.dataevento, titulo = agenda.titulo, descricao = agenda.descricao, local = agenda.local });
             }
             ViewBag.iddisciplina = new SelectList(db.Disciplinas, "iddisciplina", "descricao", agenda.iddisciplina);
             return View(agenda);
@@ -109,6 +125,10 @@ namespace AppIFES.Controllers
         // GET: Agenda/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -126,10 +146,17 @@ namespace AppIFES.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             Agenda agenda = db.Agenda.Find(id);
+            string idEvento = agenda.idevento;
+
             db.Agenda.Remove(agenda);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Apagar", "GoogleCalendar", new { idevento = idEvento });
         }
 
         protected override void Dispose(bool disposing)

@@ -36,10 +36,14 @@ namespace AppIFES.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Aluno aluno = db.Alunoes.Find(id);
+
             if (aluno == null)
             {
                 return HttpNotFound();
             }
+
+            aluno.alunodiciplinas = db.Alunodisciplinas.Where(p => p.idaluno == id).Include(p => p.disciplina).ToList();
+
             return View(aluno);
         }
 

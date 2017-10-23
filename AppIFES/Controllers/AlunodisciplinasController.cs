@@ -127,7 +127,7 @@ namespace AppIFES.Controllers
         }
 
         // GET: Alunodisciplinas/Delete/5
-        public ActionResult Delete(int id, int? id2)
+        public ActionResult Delete(int? id, int? id2)
         {
             ViewBag.idDelete = id2;
             if ((Session["Userid"] == null) || (!Session["UserSupervisor"].Equals("1")))

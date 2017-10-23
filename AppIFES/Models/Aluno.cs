@@ -5,7 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using GridMvc.DataAnnotations;
 
 namespace AppIFES.Models
 {
@@ -29,7 +29,7 @@ namespace AppIFES.Models
         public string email { get; set; }
 
         [ForeignKey("idaluno")]
-        public ICollection<Alunodisciplina> alunodiciplina { get; set; }
+        public ICollection<Alunodisciplina> alunodiciplinas { get; set; }
 
     }
 }

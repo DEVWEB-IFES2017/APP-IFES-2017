@@ -1,0 +1,21 @@
+dist: trusty
+sudo: false
+language: csharp
+solution: AppIFES.sln
+ 
+jdk:
+- oraclejdk8
+
+addons:
+  sonarqube:
+    organization: "DEVWEB-IFES2017"
+    token:
+      secure: "$SONAR_TOKEN"
+
+branches:
+  only:
+    - master
+    - v0100  
+script:
+  - sonar-scanner 
+  

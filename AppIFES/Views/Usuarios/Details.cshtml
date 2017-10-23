@@ -11,7 +11,7 @@
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.nome)
- 
+
         </dt>
 
         <dd>
@@ -34,8 +34,30 @@
             @Html.DisplayFor(model => model.simnao.descricao)
         </dd>
 
-
     </dl>
+</div>
+
+<hr />
+<h4>Grupo/Disciplina do Usuário</h4>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.disciplinas.FirstOrDefault().descricao)
+            </th>
+        </tr>
+
+        @foreach (var item in Model.disciplinas)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descricao)
+                </td>
+            </tr>
+        }
+
+    </table>
 </div>
 <p>
     @Html.ActionLink("Editar", "Edit", new { id = Model.idusuario }, new { @class = "btn btn-warning" })

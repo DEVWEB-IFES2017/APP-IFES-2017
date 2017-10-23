@@ -1,43 +1,38 @@
 ﻿@model IEnumerable<AppIFES.Models.Aluno>
+@using GridMvc.Html
 
 @{
     ViewBag.Title = "Cadastro de Aluno";
 }
 
-<h2>Cadastro de Aluno</h2>
+<center><h2>Cadastro de Aluno</h2></center>
 
 <p>
-    @Html.ActionLink("Novo", "Create", new { area = "" }, new { @class = "btn btn-primary" })
+    @Html.ActionLink(" ", "Create", new { area = "" }, new { @class = "glyphicon glyphicon-plus btn btn-primary" })
 </p>
 <div class="table-responsive">
-    <table class="table table-striped">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.email)
-            </th>
-            <th></th>
-        </tr>
+    @Html.Grid(Model).Columns(columns =>
+{
+columns.Add(col => col.idaluno, true);
+columns.Add(col => col.nome).Titled("Nome").Filterable(true).Sortable(true);
+columns.Add(col => col.email).Titled("Email").Sortable(true);
+columns.Add().Encoded(false).Sanitized(false)
+.RenderValueAs(col =>
+        @<b>
+             @Html.ActionLink(" ", "Edit", new { id = col.idaluno }, new { @class = "glyphicon glyphicon-edit btn btn-warning btn-sm" })
+             @Html.ActionLink(" ", "Details", new { id = col.idaluno }, new { @class = "glyphicon glyphicon-list-alt btn btn-success btn-sm" })
+             @Html.ActionLink(" ", "Delete", new { id = col.idaluno }, new { @class = "glyphicon glyphicon-trash btn btn-danger btn-sm" })
+             @Html.ActionLink(" ", "Index", "Alunodisciplinas", new { id = col.idaluno }, new { @class = "glyphicon glyphicon-th btn btn-info btn-sm" })
+        </b>);
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.email)
-                </td>
-                <td>
-                    @Html.ActionLink("Alterar", "Edit", new { id = item.idaluno }, new { @class = "btn btn-warning" })
-                    @Html.ActionLink("Detalhar", "Details", new { id = item.idaluno }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Apagar", "Delete", new { id = item.idaluno }, new { @class = "btn btn-danger" })
-                    @Html.ActionLink("Disciplinas", "Index","Alunodisciplinas", new { id = item.idaluno }, new { @class = "btn btn-info" })
-                </td>
-            </tr>
-        }
-
-    </table>
+}
+    ).SetLanguage("br").WithPaging(8)
 </div>
+
+<script>
+    $(function () {
+        pageGrids.ordersGrid.onRowSelect(function (e) {
+            //alert(e.row.nome);
+        });
+    });
+</script>
