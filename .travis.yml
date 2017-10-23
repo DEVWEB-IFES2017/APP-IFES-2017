@@ -6,6 +6,10 @@ solution: AppIFES.sln
 jdk:
  - oraclejdk8
 
+env:
+ global:
+   - EnableNuGetPackageRestore=true
+
 addons:
   sonarqube:
     organization: "devweb-ifes2017-github"
