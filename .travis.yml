@@ -8,7 +8,7 @@ jdk:
 
 addons:
   sonarqube:
-    organization: "DEVWEB-IFES2017"
+    organization: "devweb-ifes2017-github"
     token:
       secure: "$SONAR_TOKEN"
 
