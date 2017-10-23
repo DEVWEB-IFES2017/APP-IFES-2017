@@ -1,10 +1,10 @@
 dist: trusty
-sudo: false
+sudo: true
 language: csharp
 solution: AppIFES.sln
  
 jdk:
-- oraclejdk8
+ - oraclejdk8
 
 addons:
   sonarqube:
