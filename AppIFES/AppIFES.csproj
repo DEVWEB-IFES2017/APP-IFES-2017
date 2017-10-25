@@ -210,6 +210,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Components\client_secret.json" />
     <Content Include="Grid.mvc.readme" />
+    <Content Include="Models\ClassDiagram1.cd" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\gridmvc.js" />
     <Content Include="Scripts\gridmvc.lang.br.js" />
