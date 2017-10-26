@@ -53,5 +53,5 @@
 </div>
 <p>
     @Html.ActionLink("Editar", "Edit", new { id = Model.idagenda }, new { @class = "btn btn-warning" }) 
-    @Html.ActionLink("Cancelar", "Index", new { area = "" }, new { @class = "btn btn-success" })
+    @Html.ActionLink("Cancelar", "Index", new { data = DateTime.Now }, new { @class = "btn btn-success" })
 </p>

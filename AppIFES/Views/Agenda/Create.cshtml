@@ -26,10 +26,19 @@
         <div class="form-group">
             @Html.LabelFor(model => model.dataevento, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.dataevento, new { htmlAttributes = new { @class = "form-control" , @placeholder = "Insira a data no formato DD/MM/AAAA" } })
+                @Html.EditorFor(model => model.dataevento, new { htmlAttributes = new { @class = "form-control" , @placeholder = "Informe a data" } })
                 @Html.ValidationMessageFor(model => model.dataevento, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.hora, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.hora, new { htmlAttributes = new { @class = "form-control", @placeholder = "Informe a hora" } })
+                @Html.ValidationMessageFor(model => model.hora, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.titulo, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -64,7 +73,7 @@
 }
 
 <div>
-    @Html.ActionLink("Cancelar", "Index", new { area = "" }, new { @class = "btn btn-success" })
+    @Html.ActionLink("Cancelar", "Index", new { data = DateTime.Now }, new { @class = "btn btn-success" })
 </div>
 
 

@@ -8,6 +8,7 @@
 <center><h2>Lista de Eventos</h2></center>
 <p>
     @Html.ActionLink(" ", "Create", new { id = ViewBag.idIndex }, new { @class = "glyphicon glyphicon-plus btn btn-primary" }) 
+    @Html.ActionLink(" Ver todos Eventos", "Index", new { data = DateTime.Parse("01/01/2000") }, new { @class = "btn btn-primary" }) 
 </p>
 <div class="table-responsive">
 

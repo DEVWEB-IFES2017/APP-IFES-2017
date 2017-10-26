@@ -15,15 +15,18 @@ namespace AppIFES.Controllers
         private DadosBanco db = new DadosBanco();
                 
         // GET: Agenda
-        public ActionResult Index()
+        public ActionResult Index(DateTime data)
         {
             if (Session["Userid"] == null)
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
 
+            if (data == null)
+                data = DateTime.Now;
+
             int idUsuario = int.Parse(Session["Userid"].ToString());
-            var agenda = db.Agenda.Include(a => a.Disciplina).Where(a =>a.Disciplina.idusuario == idUsuario).OrderByDescending(a => a.dataevento);
+            var agenda = db.Agenda.Include(a => a.Disciplina).Where(a =>a.Disciplina.idusuario == idUsuario && a.dataevento >=data).OrderByDescending(a => a.dataevento);
             return View(agenda.ToList());
         }
 
@@ -63,7 +66,7 @@ namespace AppIFES.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local,idevento")] Agenda agenda)
+        public ActionResult Create([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local,idevento,hora")] Agenda agenda)
         {
             if (Session["Userid"] == null)
             {
@@ -71,6 +74,9 @@ namespace AppIFES.Controllers
             }
             if (ModelState.IsValid)
             {
+                var hora = agenda.hora.Split(':');
+
+                agenda.dataevento = agenda.dataevento.Add( new TimeSpan(int.Parse(hora[0]), int.Parse(hora[1]), 0));
                 db.Agenda.Add(agenda);
                 db.SaveChanges();
 
@@ -106,7 +112,7 @@ namespace AppIFES.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local,idevento")] Agenda agenda)
+        public ActionResult Edit([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local,idevento,hora")] Agenda agenda)
         {
             if (Session["Userid"] == null)
             {
@@ -114,6 +120,9 @@ namespace AppIFES.Controllers
             }
             if (ModelState.IsValid)
             {
+                var hora = agenda.hora.Split(':');
+
+                agenda.dataevento = agenda.dataevento.Add(new TimeSpan(int.Parse(hora[0]), int.Parse(hora[1]), 0));
                 db.Entry(agenda).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Alterar", "GoogleCalendar", new { idagenda = agenda.idagenda, date = agenda.dataevento, titulo = agenda.titulo, descricao = agenda.descricao, local = agenda.local });
