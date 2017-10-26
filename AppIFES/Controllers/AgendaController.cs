@@ -66,7 +66,7 @@ namespace AppIFES.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local,idevento")] Agenda agenda)
+        public ActionResult Create([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local,idevento,hora")] Agenda agenda)
         {
             if (Session["Userid"] == null)
             {
@@ -74,6 +74,9 @@ namespace AppIFES.Controllers
             }
             if (ModelState.IsValid)
             {
+                var hora = agenda.hora.Split(':');
+
+                agenda.dataevento = agenda.dataevento.Add( new TimeSpan(int.Parse(hora[0]), int.Parse(hora[1]), 0));
                 db.Agenda.Add(agenda);
                 db.SaveChanges();
 
@@ -109,7 +112,7 @@ namespace AppIFES.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local,idevento")] Agenda agenda)
+        public ActionResult Edit([Bind(Include = "idagenda,iddisciplina,dataevento,titulo,descricao,local,idevento,hora")] Agenda agenda)
         {
             if (Session["Userid"] == null)
             {
@@ -117,6 +120,9 @@ namespace AppIFES.Controllers
             }
             if (ModelState.IsValid)
             {
+                var hora = agenda.hora.Split(':');
+
+                agenda.dataevento = agenda.dataevento.Add(new TimeSpan(int.Parse(hora[0]), int.Parse(hora[1]), 0));
                 db.Entry(agenda).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Alterar", "GoogleCalendar", new { idagenda = agenda.idagenda, date = agenda.dataevento, titulo = agenda.titulo, descricao = agenda.descricao, local = agenda.local });

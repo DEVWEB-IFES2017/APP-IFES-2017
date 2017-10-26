@@ -26,6 +26,8 @@ namespace AppIFES.Models
 
         [Display(Name = "Data do Evento")]
         [Column(Order = 2)]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:D}", ApplyFormatInEditMode = true)]
         public DateTime dataevento { get; set; }
 
         [Display(Name = "Título")]
@@ -50,5 +52,11 @@ namespace AppIFES.Models
         [StringLength(150, ErrorMessage = "No máximo são 150 caracteres.")]
         [Column(Order = 6)]
         public string idevento { get; set; }
+
+        [Display(Name = "Hora do Evento")]
+        [Column(Order = 7)]
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:T}", ApplyFormatInEditMode = true)]
+        public String hora { get; set; }
     }
 }
