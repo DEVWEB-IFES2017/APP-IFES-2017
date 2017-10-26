@@ -30,7 +30,7 @@
                 @if (Session["Userid"] != null)
                 {
                     <li class="nav-item">
-                        @Html.ActionLink("Agenda", "Index", "Agenda", new { area = "" }, new { @class = "nav-link" })
+                        @Html.ActionLink("Eventos", "Index", "Agenda", new { area = "" }, new { @class = "nav-link" })
                     </li>
                     if (Session["UserSupervisor"].Equals("1"))
                     {
@@ -38,7 +38,7 @@
                             @Html.ActionLink("Usuários", "Index", "Usuarios", new { area = "" }, new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("Grupos", "Index", "Disciplinas", new { area = "" }, new { @class = "nav-link" })
+                            @Html.ActionLink("Agenda Compartilhada", "Index", "Disciplinas", new { area = "" }, new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("Alunos", "Index", "Alunos", new { area = "" }, new { @class = "nav-link" })
