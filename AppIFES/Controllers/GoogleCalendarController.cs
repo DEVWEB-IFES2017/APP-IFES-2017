@@ -85,7 +85,7 @@ namespace AppIFESCalendar.Controllers
             db.Entry(agenda).State = EntityState.Modified;
             db.SaveChanges();
 
-            return RedirectToAction("Index", "Agenda");
+            return RedirectToAction("Index", "Agenda", new { data = DateTime.Now });
         }
 
         // GET: Alterar
@@ -149,7 +149,7 @@ namespace AppIFESCalendar.Controllers
             googlecalendario.Calendarios.Events.Get(calendarid, agenda.idevento);
             googlecalendario.Calendarios.Events.Update(googlecalendario.Evento, calendarid, agenda.idevento).Execute();
 
-            return RedirectToAction("Index", "Agenda");
+            return RedirectToAction("Index", "Agenda", new { data = DateTime.Now });
         }
 
         public ActionResult Apagar(string idevento)
@@ -164,7 +164,7 @@ namespace AppIFESCalendar.Controllers
                 googlecalendario.Calendarios = CalendarSer(Login());
                 googlecalendario.Calendarios.Events.Delete(calendarid, idevento).Execute();
             }
-            return RedirectToAction("Index", "Agenda");
+            return RedirectToAction("Index", "Agenda", new { data = DateTime.Now });
         }
 
         private CalendarService CalendarSer(UserCredential credential)

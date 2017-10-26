@@ -30,7 +30,7 @@
                 @if (Session["Userid"] != null)
                 {
                     <li class="nav-item">
-                        @Html.ActionLink("Agenda", "Index", "Agenda", new { area = "" }, new { @class = "nav-link" })
+                        @Html.ActionLink("Agenda", "Index", "Agenda", new { data = DateTime.Now }, new { @class = "nav-link" })
                     </li>
                     if (Session["UserSupervisor"].Equals("1"))
                     {
@@ -46,14 +46,14 @@
                     }
                 }
             </ul>
-            <form class="form-inline mt-2 mt-md-0 col-md-2">
+            <form class="form-inline bottom-right">
                 @if (Session["Userid"] == null)
                 {
-                    @Html.ActionLink(" Entrar ", "Login", "Login", new { area = "" }, new { @class = "btn btn-warning my-2 my-sm-0 col-md-10" })
+                    @Html.ActionLink(" Entrar ", "Login", "Login", new { area = "" }, new { @class = "btn btn-warning my-2 my-sm-0 col-md-12" })
                 }
                 else
                 {
-                    @Html.ActionLink(Session["UserNome"] + " | Login-Off", "LoginOff", "Login", new { area = "" }, new { @class = "btn btn-danger my-2 my-sm-0 col-md-10" })
+                    @Html.ActionLink(Session["UserNome"] + " | Login-Off", "LoginOff", "Login", new { area = "" }, new { @class = "btn btn-danger my-2 my-sm-0 col-md-12" })
                 }
             </form>
         </div>

@@ -15,15 +15,18 @@ namespace AppIFES.Controllers
         private DadosBanco db = new DadosBanco();
                 
         // GET: Agenda
-        public ActionResult Index()
+        public ActionResult Index(DateTime data)
         {
             if (Session["Userid"] == null)
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
 
+            if (data == null)
+                data = DateTime.Now;
+
             int idUsuario = int.Parse(Session["Userid"].ToString());
-            var agenda = db.Agenda.Include(a => a.Disciplina).Where(a =>a.Disciplina.idusuario == idUsuario).OrderByDescending(a => a.dataevento);
+            var agenda = db.Agenda.Include(a => a.Disciplina).Where(a =>a.Disciplina.idusuario == idUsuario && a.dataevento >=data).OrderByDescending(a => a.dataevento);
             return View(agenda.ToList());
         }
 
