@@ -27,7 +27,7 @@ namespace AppIFES.Models
         [Display(Name = "Data do Evento")]
         [Column(Order = 2)]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:D}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime dataevento { get; set; }
 
         [Display(Name = "Título")]
