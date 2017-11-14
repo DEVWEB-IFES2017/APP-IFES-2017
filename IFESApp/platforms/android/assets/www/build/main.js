@@ -451,7 +451,6 @@ var ServiceLogin = (function () {
     };
     ServiceLogin.prototype.insert = function (usuario) {
         console.log("Inserindo no banco...");
-        console.log(usuario);
         return this.dbProvider.getDB().then(function (db) {
             var sql = 'insert into usuario (id, nome, email) values (?, ?, ?)';
             var data = [usuario.idusuario, usuario.nome, usuario.email];
@@ -464,15 +463,17 @@ var ServiceLogin = (function () {
         usuario.idusuario = 0;
         this.dbProvider.getDB().then(function (db) {
             //let data = [];
-            var sql = 'Select * from usuario where id not is null';
+            var sql = 'select * from usuario where id not is null';
             return db.executeSql(sql, null).then(function (data) {
                 if (data.rows.length > 0) {
                     var item = data.rows.item(0);
                     usuario.idusuario = item.id;
                     usuario.nome = item.nome;
                     usuario.email = item.email;
+                    console.log(usuario);
                     return usuario;
                 }
+                console.log(usuario);
                 return usuario;
             }).catch(function (e) { return console.error(e); });
         }).catch(function (e) { return console.error(e); });
