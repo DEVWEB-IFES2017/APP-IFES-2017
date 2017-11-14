@@ -58,7 +58,11 @@ var LoginPage = (function () {
 }());
 LoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+<<<<<<< HEAD
         selector: 'page-login',template:/*ion-inline-start:"/Users/zion/Documents/IFESApp/IFESApp/src/pages/login/login.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Faça seu login</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-list>\n      <ion-item>\n        <ion-label floating>Informe seu email:</ion-label>\n        <ion-input type="email" [(ngModel)]="model.email"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label floating>Digite sua senha:</ion-label>\n        <ion-input type="password" [(ngModel)]="model.senha"></ion-input>\n      </ion-item>\n    </ion-list>\n    <button ion-button (click)="login()" unlock full>\n      <ion-icon name="unlock"> Entrar</ion-icon>\n    </button>   \n</ion-content>'/*ion-inline-end:"/Users/zion/Documents/IFESApp/IFESApp/src/pages/login/login.html"*/,
+=======
+        selector: 'page-login',template:/*ion-inline-start:"C:\Users\alexa\Documents\IFES\APP-IFES-2017\IFESApp\src\pages\login\login.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Faça seu login</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <ion-list>\n\n      <ion-item>\n\n        <ion-label floating>Informe seu email:</ion-label>\n\n        <ion-input type="email" [(ngModel)]="model.email"></ion-input>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-label floating>Digite sua senha:</ion-label>\n\n        <ion-input type="password" [(ngModel)]="model.senha"></ion-input>\n\n      </ion-item>\n\n    </ion-list>\n\n    <button ion-button (click)="login()" unlock full>\n\n      <ion-icon name="unlock"> Entrar</ion-icon>\n\n    </button>   \n\n</ion-content>'/*ion-inline-end:"C:\Users\alexa\Documents\IFES\APP-IFES-2017\IFESApp\src\pages\login\login.html"*/,
+>>>>>>> f77c6498ecfa65804cd73109f9377fa9122c530f
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */], __WEBPACK_IMPORTED_MODULE_2__providers_servicelogin_servicelogin__["a" /* ServiceLogin */]])
 ], LoginPage);
@@ -141,7 +145,7 @@ var AboutPage = (function () {
 }());
 AboutPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-about',template:/*ion-inline-start:"/Users/zion/Documents/IFESApp/IFESApp/src/pages/about/about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      IFES - Serra\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-list-header>Contatos </ion-list-header>\n    <ion-item>\n      <ion-icon name="contact" item-start></ion-icon>\n      edimar.analise@gmail.com\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/zion/Documents/IFESApp/IFESApp/src/pages/about/about.html"*/
+        selector: 'page-about',template:/*ion-inline-start:"C:\Users\alexa\Documents\IFES\APP-IFES-2017\IFESApp\src\pages\about\about.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      IFES - Serra\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-list>\n\n    <ion-list-header>Contatos </ion-list-header>\n\n    <ion-item>\n\n      <ion-icon name="contact" item-start></ion-icon>\n\n      edimar.analise@gmail.com\n\n    </ion-item>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\alexa\Documents\IFES\APP-IFES-2017\IFESApp\src\pages\about\about.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]])
 ], AboutPage);
@@ -176,7 +180,11 @@ var ContactPage = (function () {
 }());
 ContactPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+<<<<<<< HEAD
         selector: 'page-contact',template:/*ion-inline-start:"/Users/zion/Documents/IFESApp/IFESApp/src/pages/contact/contact.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Contatos\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-list-header>Fale conosco </ion-list-header>\n    <ion-item>\n      <ion-icon name="mail" item-start></ion-icon>\n      edimar.analise@gmail.com\n    </ion-item>\n    <ion-item>\n      <ion-icon name="call" item-start></ion-icon>\n      (27) 3348-9200\n    </ion-item>\n    <ion-item>\n      <ion-icon name="clock" item-start></ion-icon>\n      07h �s 22h30m\n    </ion-item>\n    <ion-item>\n      <ion-icon name="pin" item-start></ion-icon>\n      <p>ES-010, Km-6,5 - Manguinhos, Serra - ES, 29173-087</p>\n      </ion-item>\n      <ion-item>\n        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14977.900153717135!2d-40.2171257!3d-20.1975718!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xafbf9ef51ebb8429!2sInstituto+Federal+do+Esp%C3%ADrito+Santo+(IFES)+-+Campus+Serra!5e0!3m2!1spt-BR!2sbr!4v1510584737591" width="450" height="330" frameborder="0" style="border:0" allowfullscreen></iframe>\n      </ion-item>\n  </ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/Users/zion/Documents/IFESApp/IFESApp/src/pages/contact/contact.html"*/
+=======
+        selector: 'page-contact',template:/*ion-inline-start:"C:\Users\alexa\Documents\IFES\APP-IFES-2017\IFESApp\src\pages\contact\contact.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Contatos\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-list>\n\n    <ion-list-header>Fale conosco </ion-list-header>\n\n    <ion-item>\n\n      <ion-icon name="mail" item-start></ion-icon>\n\n      edimar.analise@gmail.com\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-icon name="call" item-start></ion-icon>\n\n      (27) 3348-9200\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-icon name="clock" item-start></ion-icon>\n\n      07h às 22h30m\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-icon name="pin" item-start></ion-icon>\n\n      <p>ES-010, Km-6,5 - Manguinhos, Serra - ES, 29173-087</p>\n\n      </ion-item>\n\n      <ion-item>\n\n        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14977.900153717135!2d-40.2171257!3d-20.1975718!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xafbf9ef51ebb8429!2sInstituto+Federal+do+Esp%C3%ADrito+Santo+(IFES)+-+Campus+Serra!5e0!3m2!1spt-BR!2sbr!4v1510584737591" width="450" height="330" frameborder="0" style="border:0" allowfullscreen></iframe>\n\n      </ion-item>\n\n  </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\alexa\Documents\IFES\APP-IFES-2017\IFESApp\src\pages\contact\contact.html"*/
+>>>>>>> f77c6498ecfa65804cd73109f9377fa9122c530f
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]])
 ], ContactPage);
@@ -211,7 +219,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/zion/Documents/IFESApp/IFESApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title> IFES</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class="home">\n\n</ion-content>\n'/*ion-inline-end:"/Users/zion/Documents/IFESApp/IFESApp/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"C:\Users\alexa\Documents\IFES\APP-IFES-2017\IFESApp\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n   <ion-title>IFES</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding class="home">\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\alexa\Documents\IFES\APP-IFES-2017\IFESApp\src\pages\home\home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]])
 ], HomePage);
@@ -389,7 +397,7 @@ var MyApp = (function () {
     return MyApp;
 }());
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/zion/Documents/IFESApp/IFESApp/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/zion/Documents/IFESApp/IFESApp/src/app/app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\alexa\Documents\IFES\APP-IFES-2017\IFESApp\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n\n'/*ion-inline-end:"C:\Users\alexa\Documents\IFES\APP-IFES-2017\IFESApp\src\app\app.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_4__providers_database_database__["a" /* DatabaseProvider */], __WEBPACK_IMPORTED_MODULE_7__providers_servicelogin_servicelogin__["a" /* ServiceLogin */]])
 ], MyApp);
@@ -484,7 +492,7 @@ var ServiceLogin = (function () {
 }());
 ServiceLogin = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__database_database__["a" /* DatabaseProvider */], __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__database_database__["a" /* DatabaseProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__database_database__["a" /* DatabaseProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _b || Object])
 ], ServiceLogin);
 
 var Usuario = (function () {
@@ -493,6 +501,7 @@ var Usuario = (function () {
     return Usuario;
 }());
 
+var _a, _b;
 //# sourceMappingURL=servicelogin.js.map
 
 /***/ }),
@@ -598,7 +607,7 @@ var TabsPage = (function () {
     return TabsPage;
 }());
 TabsPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/zion/Documents/IFESApp/IFESApp/src/pages/tabs/tabs.html"*/'<ion-tabs>\n  <ion-tab [root]="tab1Root" tabTitle="Inicio" tabIcon="home"></ion-tab>\n  <!--<ion-tab [root]="tab4Root" tabTitle="Login" tabIcon="unlock"></ion-tab>-->\n  <ion-tab [root]="tab3Root" tabTitle="Contato" tabIcon="contacts"></ion-tab>  \n  <ion-tab [root]="tab2Root" tabTitle="Sobre" tabIcon="information-circle"></ion-tab>  \n</ion-tabs>\n'/*ion-inline-end:"/Users/zion/Documents/IFESApp/IFESApp/src/pages/tabs/tabs.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\alexa\Documents\IFES\APP-IFES-2017\IFESApp\src\pages\tabs\tabs.html"*/'<ion-tabs>\n\n  <ion-tab [root]="tab1Root" tabTitle="Inicio" tabIcon="home"></ion-tab>\n\n  <!--<ion-tab [root]="tab4Root" tabTitle="Login" tabIcon="unlock"></ion-tab>-->\n\n  <ion-tab [root]="tab3Root" tabTitle="Contato" tabIcon="contacts"></ion-tab>  \n\n  <ion-tab [root]="tab2Root" tabTitle="Sobre" tabIcon="information-circle"></ion-tab>  \n\n</ion-tabs>\n\n'/*ion-inline-end:"C:\Users\alexa\Documents\IFES\APP-IFES-2017\IFESApp\src\pages\tabs\tabs.html"*/
     }),
     __metadata("design:paramtypes", [])
 ], TabsPage);
