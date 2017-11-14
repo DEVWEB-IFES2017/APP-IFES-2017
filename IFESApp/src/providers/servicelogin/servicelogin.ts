@@ -42,7 +42,6 @@ export class ServiceLogin {
 
   public insert(usuario: Usuario) {
     console.log("Inserindo no banco...");
-    console.log(usuario);
     
     return this.dbProvider.getDB().then((db: SQLiteObject) => {
         let sql = 'insert into usuario (id, nome, email) values (?, ?, ?)';
@@ -67,8 +66,10 @@ export class ServiceLogin {
               usuario.idusuario = item.id;
               usuario.nome = item.nome;
               usuario.email = item.email;
+              console.log(usuario);
               return usuario;
           }
+          console.log(usuario);
           return usuario;
       }).catch((e) => console.error(e));
   }).catch((e) => console.error(e));
