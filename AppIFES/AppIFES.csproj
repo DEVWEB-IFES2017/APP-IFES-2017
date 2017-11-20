@@ -289,6 +289,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AgendaController.cs" />
     <Compile Include="Controllers\AlunodisciplinasController.cs" />
+    <Compile Include="Controllers\AlunoesApiController.cs" />
     <Compile Include="Controllers\AlunosController.cs" />
     <Compile Include="Controllers\DisciplinasController.cs" />
     <Compile Include="Controllers\GoogleCalendarController.cs" />
