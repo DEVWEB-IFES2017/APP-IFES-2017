@@ -1,8 +1,9 @@
 import { NgModule, ErrorHandler, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
+import { IFESApp } from './app.component';
 
+import { IonicStorageModule } from '@ionic/storage';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
@@ -12,12 +13,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ServiceLogin } from '../providers/servicelogin/servicelogin';
 import { HttpModule } from '@angular/http';
-import { SQLite } from '@ionic-native/sqlite';
-import { DatabaseProvider } from '../providers/database/database';
+
 
 @NgModule({
   declarations: [
-    MyApp,
+    IFESApp,
     AboutPage,
     ContactPage,
     HomePage,
@@ -27,11 +27,12 @@ import { DatabaseProvider } from '../providers/database/database';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(IFESApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
+    IFESApp,
     AboutPage,
     ContactPage,
     HomePage,
@@ -42,8 +43,6 @@ import { DatabaseProvider } from '../providers/database/database';
     StatusBar,
     SplashScreen,
     ServiceLogin,
-    SQLite,
-    DatabaseProvider,
     {provide: LOCALE_ID, useValue: 'pt-BR'},
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

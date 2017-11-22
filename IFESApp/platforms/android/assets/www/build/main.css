@@ -27981,3 +27981,7 @@ ion-navbar.toolbar {
 .toolbar-title {
   text-align: center;
 }
+
+.tabs-md .tab-button-ico {
+  color: #ccc;
+}

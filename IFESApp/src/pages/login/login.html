@@ -6,10 +6,15 @@ source ~/.profile<ion-header>
 <ion-content padding>
   <ion-list>
       <ion-item>
+          <ion-label *ngIf="! model.servidor">Servidor</ion-label>
+          <ion-label *ngIf="model.servidor">Aluno</ion-label>
+          <ion-checkbox color="dark" checked="false" [(ngModel)]="model.servidor"></ion-checkbox>
+      </ion-item>
+      <ion-item>
         <ion-label floating>Informe seu email:</ion-label>
         <ion-input type="email" [(ngModel)]="model.email"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="! model.servidor"> 
         <ion-label floating>Digite sua senha:</ion-label>
         <ion-input type="password" [(ngModel)]="model.senha"></ion-input>
       </ion-item>

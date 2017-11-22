@@ -1,6 +1,6 @@
 {
   "name": "IFESApp",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
   "private": true,
@@ -24,7 +24,8 @@
     "@ionic-native/splash-screen": "4.3.2",
     "@ionic-native/sqlite": "^4.3.3",
     "@ionic-native/status-bar": "4.3.2",
-    "@ionic/storage": "2.0.1",
+    "@ionic/storage": "^2.0.1",
+    "cordova-android": "~6.3.0",
     "cordova-browser": "~5.0.1",
     "cordova-ios": "~4.5.3",
     "cordova-plugin-device": "^1.1.4",
@@ -37,8 +38,7 @@
     "ionicons": "3.0.0",
     "rxjs": "5.4.3",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.18",
-    "cordova-android": "~6.3.0"
+    "zone.js": "0.8.18"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.0.1",

@@ -2,12 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams , ToastController } from 'ionic-angular';
 import { ServiceLogin } from '../../providers/servicelogin/servicelogin';
 import { TabsPage } from '../../pages/tabs/tabs';
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Usuario } from '../../providers/servicelogin/servicelogin';
 
 @IonicPage()
 @Component({
@@ -24,28 +19,22 @@ export class LoginPage {
 
   login() {
     console.log("inicio login");
-    this.servicelogin.login(this.model.email, this.model.senha).then((result: any) => 
+    this.servicelogin.login(this.model.email, this.model.senha, this.model.servidor).then((result: any) => 
       {
         
         this.toast.create({ message: 'Seja bem vindo ' + result.nome, position: 'botton', duration: 3000 }).present();
-        //this.toast.create({ message: 'Usuário logado com sucesso. E-Mail: ' + result.email, position: 'botton', duration: 3000 }).present();
-        //Salvar o token no Ionic Storage para usar em futuras requisições.
+        //this.toast.create({ message: 'Usuï¿½rio logado com sucesso. E-Mail: ' + result.email, position: 'botton', duration: 3000 }).present();
+        //Salvar o token no Ionic Storage para usar em futuras requisiï¿½ï¿½es.
         //Redirecionar o usuario para outra tela usando o navCtrl
         //this.navCtrl.pop();
         this.navCtrl.setRoot(TabsPage);
       }).catch((error: any) => 
       {
-        this.toast.create({ message: 'Falha ao efetuar login, Usuário e Senha inválidos!!', position: 'botton', duration: 3000 }).present();
+        this.toast.create({ message: 'Falha ao efetuar login, Usuï¿½rio e Senha invï¿½lidos!!', position: 'botton', duration: 3000 }).present();
       });
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
 
-}
-
-export class Usuario {
-  email: string;
-  senha: string;
-  nome: string;
 }
