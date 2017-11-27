@@ -18,7 +18,3 @@ deploy:
   name: APPIfes
   on:
       branch: V0110
-- provider: Environment
-  name: APPIfes
-  on:
-      branch: V0110
