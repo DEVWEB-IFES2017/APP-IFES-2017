@@ -1,0 +1,24 @@
+version: 1.0.{build}
+nuget:
+  project_feed: true
+build:
+  publish_wap: true
+  publish_nuget: true
+  publish_nuget_symbols: true
+  include_nuget_references: true
+  verbosity: minimal
+before_build:
+- cmd: nuget restore
+#test: off
+artifacts:
+  - path: APPIfes
+    name: APPIfes
+deploy:
+- provider: Environment
+  name: APPIfes
+  on:
+      branch: V0110
+- provider: Environment
+  name: APPIfes
+  on:
+      branch: V0110
