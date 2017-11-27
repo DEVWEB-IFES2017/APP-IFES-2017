@@ -13,8 +13,3 @@ before_build:
 artifacts:
   - path: APPIfes
     name: APPIfes
-deploy:
-- provider: Environment
-  name: APPIfes
-  on:
-      branch: V0110
