@@ -12,6 +12,8 @@ namespace AppIFES.Models
     [Table("alunodisciplina")]
     public class Alunodisciplina
     {
+        
+        
         [Key]
         [Display(Name = "Grupo")]
         [Column(Order = 0)]
