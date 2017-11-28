@@ -10,6 +10,8 @@ using GridMvc.DataAnnotations;
 namespace AppIFES.Models
 {
     [Table("aluno")]
+    
+    
     public class Aluno
     {
         [Key]
