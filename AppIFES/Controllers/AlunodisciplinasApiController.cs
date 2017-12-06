@@ -12,22 +12,27 @@ using AppIFES.Models;
 
 namespace AppIFES.Controllers
 {
-    public class DisciplinasApiController : ApiController
+    public class AlunodisciplinasApiController : ApiController
     {
         private DadosBanco db = new DadosBanco();
 
-        // GET: api/DisciplinasApi/5
+        // GET: api/AlunodisciplinasApi/5
         [ResponseType(typeof(Disciplina))]
-        public IHttpActionResult GetDisciplina(int id)
+        public IHttpActionResult GetAlunodisciplina(int id)
         {
-            List<Disciplina> disciplina = db.Disciplinas.Where( a => a.idusuario == id).ToList();
+            List<Disciplina> disciplina = (from disc in db.Disciplinas
+                                           join aldi in db.Alunodisciplinas on disc.iddisciplina equals aldi.iddisciplina
+                                           where disc.iddisciplina == aldi.iddisciplina && aldi.idaluno == id
+                                          select disc).ToList();
+
             if (disciplina == null)
             {
                 return NotFound();
             }
 
             return Ok(disciplina);
-        }      
+        }
+
 
         protected override void Dispose(bool disposing)
         {
@@ -38,9 +43,9 @@ namespace AppIFES.Controllers
             base.Dispose(disposing);
         }
 
-        private bool DisciplinaExists(int id)
+        private bool AlunodisciplinaExists(int id)
         {
-            return db.Disciplinas.Count(e => e.iddisciplina == id) > 0;
+            return db.Alunodisciplinas.Count(e => e.iddisciplina == id) > 0;
         }
     }
 }
