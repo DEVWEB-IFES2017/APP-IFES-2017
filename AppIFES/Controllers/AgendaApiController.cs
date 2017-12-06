@@ -56,6 +56,9 @@ namespace AppIFES.Controllers
             try
             {
                 db.SaveChanges();
+                GoogleCalendarController calendargoogle = new GoogleCalendarController();
+
+                calendargoogle.Altera(agenda.idagenda, agenda.dataevento, agenda.titulo, agenda.descricao, agenda.local);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -83,7 +86,14 @@ namespace AppIFES.Controllers
 
             db.Agenda.Add(agenda);
             db.SaveChanges();
+
+            GoogleCalendarController calendargoogle = new GoogleCalendarController();
+            
+            calendargoogle.Adiciona(agenda.idagenda, agenda.dataevento, agenda.titulo, agenda.descricao, agenda.local);
+
+
             //RedirectToAction("Adicionar", "GoogleCalendar", new { idagenda = agenda.idagenda, date = agenda.dataevento, titulo = agenda.titulo, descricao = agenda.descricao, local = agenda.local });
+
             return CreatedAtRoute("DefaultApi", new { id = agenda.idagenda }, agenda);
         }
 

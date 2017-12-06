@@ -14,7 +14,7 @@ using System.Web.Mvc;
 using AppIFES.Models;
 using System.Data.Entity;
 
-namespace AppIFESCalendar.Controllers
+namespace AppIFES.Controllers
 {
     public class GoogleCalendarController : Controller
     {
@@ -26,21 +26,15 @@ namespace AppIFESCalendar.Controllers
 
         private GoogleCalendar googlecalendario = new GoogleCalendar();
 
-        // GET: Adicionar
-        public ActionResult Adicionar(int idagenda, DateTime date, string titulo, string descricao, string local)
+        public void Adiciona(int idagenda, DateTime date, string titulo, string descricao, string local)
         {
-            if (Session["Userid"] == null)
-            {
-                return RedirectToAction("Index", "Home", new { area = "" });
-            }
-
             Agenda agenda = db.Agenda.Find(idagenda);
             Disciplina disciplina = db.Disciplinas.Where(a => a.iddisciplina == agenda.iddisciplina).Include(a => a.usuario).FirstOrDefault();
             List<Alunodisciplina> alunodisciplinas = db.Alunodisciplinas.Where(a => a.iddisciplina == agenda.iddisciplina).Include(a => a.aluno).ToList();
 
             List<EventAttendee> Contatos = new List<EventAttendee>();
             Contatos.Add(new EventAttendee { Email = disciplina.usuario.email });
-            
+
             foreach (var alunodisciplina in alunodisciplinas)
             {
                 Contatos.Add(new EventAttendee { Email = alunodisciplina.aluno.email });
@@ -74,7 +68,7 @@ namespace AppIFESCalendar.Controllers
                         new EventReminder() { Method = "email", Minutes = 24 * 60 },
                         new EventReminder() { Method = "sms", Minutes = 24 * 60 },
                         new EventReminder() { Method = "popup", Minutes = 24 * 60 }
-                    }                
+                    }
                 }
             };
 
@@ -84,6 +78,74 @@ namespace AppIFESCalendar.Controllers
 
             db.Entry(agenda).State = EntityState.Modified;
             db.SaveChanges();
+
+        }
+
+        public void Altera(int idagenda, DateTime date, string titulo, string descricao, string local)
+        {
+
+            Agenda agenda = db.Agenda.Find(idagenda);
+            Disciplina disciplina = db.Disciplinas.Where(a => a.iddisciplina == agenda.iddisciplina).Include(a => a.usuario).FirstOrDefault();
+            List<Alunodisciplina> alunodisciplinas = db.Alunodisciplinas.Where(a => a.iddisciplina == agenda.iddisciplina).Include(a => a.aluno).ToList();
+
+            List<EventAttendee> Contatos = new List<EventAttendee>();
+
+            Contatos.Add(new EventAttendee { Email = disciplina.usuario.email });
+
+            foreach (var alunodisciplina in alunodisciplinas)
+            {
+                Contatos.Add(new EventAttendee { Email = alunodisciplina.aluno.email });
+            }
+
+
+            googlecalendario.Evento = new Event()
+            {
+                Id = agenda.idevento,
+                Created = date,
+                Description = descricao,
+                Location = local,
+                Kind = "",
+                GuestsCanInviteOthers = true,
+                Summary = titulo,
+                Sequence = idagenda,
+                Start = new EventDateTime()
+                {
+                    DateTime = date,
+                    TimeZone = "America/Boa_Vista"
+                },
+                End = new EventDateTime()
+                {
+                    DateTime = date,
+                    TimeZone = "America/Boa_Vista"
+                },
+                Recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=1" },
+                Attendees = Contatos,
+                Reminders = new Event.RemindersData()
+                {
+                    UseDefault = false,
+                    Overrides = new EventReminder[] {
+                       new EventReminder() { Method = "email", Minutes = 24 * 60 },
+                       new EventReminder() { Method = "sms", Minutes = 24 * 60 },
+                       new EventReminder() { Method = "popup", Minutes = 24 * 60 }
+                   }
+                }
+
+            };
+
+            googlecalendario.Calendarios = CalendarSer(Login());
+            googlecalendario.Calendarios.Events.Get(calendarid, agenda.idevento);
+            googlecalendario.Calendarios.Events.Update(googlecalendario.Evento, calendarid, agenda.idevento).Execute();
+        }
+
+        // GET: Adicionar
+        public ActionResult Adicionar(int idagenda, DateTime date, string titulo, string descricao, string local)
+        {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
+
+            Adiciona(idagenda, date, titulo, descricao, local);
 
             return RedirectToAction("Index", "Agenda", new { data = DateTime.Now });
         }
@@ -96,58 +158,7 @@ namespace AppIFESCalendar.Controllers
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
 
-
-            Agenda agenda = db.Agenda.Find(idagenda);
-            Disciplina disciplina = db.Disciplinas.Where(a => a.iddisciplina == agenda.iddisciplina).Include(a => a.usuario).FirstOrDefault();
-            List<Alunodisciplina> alunodisciplinas = db.Alunodisciplinas.Where(a => a.iddisciplina == agenda.iddisciplina).Include(a => a.aluno).ToList();
-
-            List<EventAttendee> Contatos = new List<EventAttendee>();
-            
-            Contatos.Add(new EventAttendee { Email = disciplina.usuario.email });
-
-           foreach (var alunodisciplina in alunodisciplinas)
-           {
-               Contatos.Add(new EventAttendee { Email = alunodisciplina.aluno.email });
-           }
-
-
-           googlecalendario.Evento = new Event()
-           {
-               Id = agenda.idevento,
-               Created = date,
-               Description = descricao,
-               Location = local,
-               Kind = "",
-               GuestsCanInviteOthers = true,
-               Summary = titulo,
-               Sequence = idagenda,
-               Start = new EventDateTime()
-               {
-                   DateTime = date,
-                   TimeZone = "America/Boa_Vista"
-               },
-               End = new EventDateTime()
-               {
-                   DateTime = date,
-                   TimeZone = "America/Boa_Vista"
-               },
-               Recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=1" },
-               Attendees = Contatos,
-               Reminders = new Event.RemindersData()
-               {
-                   UseDefault = false,
-                   Overrides = new EventReminder[] {
-                       new EventReminder() { Method = "email", Minutes = 24 * 60 },
-                       new EventReminder() { Method = "sms", Minutes = 24 * 60 },
-                       new EventReminder() { Method = "popup", Minutes = 24 * 60 }
-                   }
-               }
-
-           };
-           
-            googlecalendario.Calendarios = CalendarSer(Login());
-            googlecalendario.Calendarios.Events.Get(calendarid, agenda.idevento);
-            googlecalendario.Calendarios.Events.Update(googlecalendario.Evento, calendarid, agenda.idevento).Execute();
+            Altera(idagenda, date, titulo, descricao, local);
 
             return RedirectToAction("Index", "Agenda", new { data = DateTime.Now });
         }
