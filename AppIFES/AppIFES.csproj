@@ -292,6 +292,7 @@
     <Compile Include="Controllers\AlunodisciplinasController.cs" />
     <Compile Include="Controllers\AlunoesApiController.cs" />
     <Compile Include="Controllers\AlunosController.cs" />
+    <Compile Include="Controllers\DisciplinasApiController.cs" />
     <Compile Include="Controllers\DisciplinasController.cs" />
     <Compile Include="Controllers\GoogleCalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
