@@ -165,6 +165,9 @@ namespace AppIFES.Controllers
             db.Agenda.Remove(agenda);
             db.SaveChanges();
 
+            if (idEvento == "") 
+                return RedirectToAction("Index", "Agenda", new { data = DateTime.Now });
+
             return RedirectToAction("Apagar", "GoogleCalendar", new { idevento = idEvento });
         }
 

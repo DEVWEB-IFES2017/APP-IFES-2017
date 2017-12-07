@@ -163,17 +163,17 @@ namespace AppIFES.Controllers
             return RedirectToAction("Index", "Agenda", new { data = DateTime.Now });
         }
 
-        public ActionResult Apagar(string idevento)
+        public ActionResult Apagar(string id)
         {
             if (Session["Userid"] == null)
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
 
-            if (idevento != null)
+            if (id != null)
             {
                 googlecalendario.Calendarios = CalendarSer(Login());
-                googlecalendario.Calendarios.Events.Delete(calendarid, idevento).Execute();
+                googlecalendario.Calendarios.Events.Delete(calendarid, id).Execute();
             }
             return RedirectToAction("Index", "Agenda", new { data = DateTime.Now });
         }
