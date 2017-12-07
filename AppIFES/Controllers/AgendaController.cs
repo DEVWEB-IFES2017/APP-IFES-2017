@@ -160,7 +160,10 @@ namespace AppIFES.Controllers
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
             Agenda agenda = db.Agenda.Find(id);
-            string idEvento = agenda.idevento;
+            string idEvento = "";
+
+            if (agenda.idevento !=null) 
+              idEvento = agenda.idevento;
 
             db.Agenda.Remove(agenda);
             db.SaveChanges();

@@ -19,12 +19,6 @@ namespace AppIFES
                 url: "{controller}/{action}/{id}/{id2}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, id2 = UrlParameter.Optional }
             );
-            /*routes.MapHttpAttributeRoutes();
-            routes.Routes.MapHttpRoute(
-                name: "WebApi",
-                routeTemplate: "api/{controller}/{id}",
-            defaults: new { id = RouteParameter.Optional }
-            );*/
         }
     }
 }
