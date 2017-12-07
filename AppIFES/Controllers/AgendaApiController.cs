@@ -27,7 +27,7 @@ namespace AppIFES.Controllers
         [ResponseType(typeof(Agenda))]
         public IHttpActionResult GetAgenda(int id)
         {
-            Agenda agenda = db.Agenda.Find(id);
+            List<Agenda> agenda = db.Agenda.Where(a=> a.Disciplina.idusuario == id).ToList();
             if (agenda == null)
             {
                 return NotFound();
