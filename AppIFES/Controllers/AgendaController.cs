@@ -26,7 +26,7 @@ namespace AppIFES.Controllers
                 data = DateTime.Now;
 
             int idUsuario = int.Parse(Session["Userid"].ToString());
-            var agenda = db.Agenda.Include(a => a.Disciplina).Where(a =>a.Disciplina.idusuario == idUsuario && a.dataevento >=data).OrderByDescending(a => a.dataevento);
+            var agenda = db.Agenda.Include(a => a.Disciplina).Where(a =>a.Disciplina.idusuario == idUsuario && a.dataevento >= data).OrderByDescending(a => a.dataevento);
             return View(agenda.ToList());
         }
 

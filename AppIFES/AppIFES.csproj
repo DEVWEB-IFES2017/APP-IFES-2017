@@ -261,6 +261,8 @@
     <Content Include="Components\client_secret.json" />
     <Content Include="Grid.mvc.readme" />
     <Content Include="Models\ClassDiagram1.cd" />
+    <Content Include="App_Data\.credentials\Google.Apis.Auth.OAuth2.Responses.TokenResponse-user" />
+    <None Include="Properties\PublishProfiles\ifes - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\DataHora.js" />
     <Content Include="Scripts\gridmvc.js" />
@@ -356,9 +358,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

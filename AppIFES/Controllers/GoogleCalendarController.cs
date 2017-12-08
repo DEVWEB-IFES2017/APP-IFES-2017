@@ -211,10 +211,11 @@ namespace AppIFES.Controllers
         {
             UserCredential credential;
 
-            using (var stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + @"Components\client_secret.json", FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + @"/components/client_secret.json", FileMode.Open, FileAccess.Read))
             {
-                string credPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-                credPath = Path.Combine(credPath, ".credentials");
+                //string credPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+                string credPath = AppDomain.CurrentDomain.BaseDirectory + @"/App_Data/.credentials/";
+                //credPath = Path.Combine(credPath,".credentials");
                 Scopes = new[] { CalendarService.Scope.Calendar };
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(stream).Secrets, Scopes, "user", CancellationToken.None, new FileDataStore(credPath, true)).Result;
             }
