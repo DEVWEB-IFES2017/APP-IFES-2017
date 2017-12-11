@@ -3564,7 +3564,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     display: none
 }
 
-    .collapse.show {
+    .collapse.in {
         display: block
     }
 
